@@ -1,0 +1,9 @@
+.icon {
+   color: white;
+   font-size: 1.6rem;
+   cursor:pointer
+}
+
+.icon :hover {
+   color: cyan
+}
