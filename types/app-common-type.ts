@@ -1,7 +1,3 @@
-export interface themeContextType {
-  theme: any
-  changeTheme: (theme: string) => void
-}
 export interface responseProps {
   code: number
   data: any

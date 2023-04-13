@@ -1,21 +1,4 @@
-export const THEME = {
-  LIGHT: {
-    text: 'light',
-    style: {
-      background:
-        'linear-gradient(150deg, rgba(95,237,240,1) 0%, rgba(255,149,217,1) 100%)',
-      color: 'black'
-    }
-  },
-  DARK: {
-    text: 'dark',
-    style: {
-      background:
-        'linear-gradient(150deg, rgba(43,98,99,1) 0%, rgba(117,67,99,1) 100%)',
-      color: '#d3eaf2'
-    }
-  }
-}
+export const textWhite = '#fff'
 
 export const ROLE = {
   ADMIN: 'admin',
@@ -24,27 +7,18 @@ export const ROLE = {
 }
 
 export const PATH = {
-  CUSTOMER: 'khach-hang',
-  MANAGER: 'quan-ly',
-  STORE: 'cua-hang',
-  ORDER: 'don-hang',
-  SETTING: 'cai-dat',
-  PROFILE: 'ho-so',
-  PRODUCT: 'san-pham',
-  LOGIN: 'dang-nhap',
-  REGISTER: 'dang-ky',
-  FORGOT_PASSWORD: 'quen-mat-khau',
-  CREATE: 'tao-moi',
-  EDIT: 'chinh-sua',
-  CATEGORY: 'danh-muc',
-  WAREHOUSE: 'kho-hang',
-  PROMOTIONS: 'chuong-trinh-khuyen-mai',
-  SALES_STATISTICS: 'bao-cao-doan'
+  ABOUT_US: 've-mina',
+  COURSE: 'khoa-hoc',
+  OPENING_SCHEDULE: 'lich-khai-giang',
+  CLASS_REGISTRATION: 'dang-ky-hoc',
+  CLASS: 'lop-hoc',
+  TAKE_THE_TEST: 'lam-bai-test'
 }
 
 export const STORAGE_KEY = {
   LOCAL_USER: 'tshop-user',
-  THEME: 'theme'
+  THEME: 'theme',
+  SECTIONTHEME: 'sectionTheme'
 }
 
 export const API = `${process.env.REACT_APP_SERVER_URL}/api`
@@ -73,3 +47,26 @@ export const STORAGE = {
 }
 
 export const ACCEPT_FILE = ['image/jpeg', 'image/jpg', 'image/png']
+
+export const menuitemsList = [
+  {
+    path: PATH.ABOUT_US,
+    label: 'Về MINA'
+  },
+  {
+    path: PATH.CLASS_REGISTRATION,
+    label: 'Đăng ký học'
+  },
+  {
+    path: PATH.COURSE,
+    label: 'Khoá học'
+  },
+  {
+    path: PATH.CLASS,
+    label: 'Lớp học'
+  },
+  {
+    path: PATH.TAKE_THE_TEST,
+    label: 'Làm bài Test'
+  }
+]

@@ -1,19 +1,15 @@
 import React from 'react'
-import {
-  SettingOutlined,
-  EditOutlined,
-  EllipsisOutlined
-} from '@ant-design/icons'
+import { SettingOutlined, EditOutlined } from '@ant-design/icons'
 import { Card } from 'antd'
 const { Meta } = Card
 
 // interface Props {}
 
-export const ProductCard: React.FC = () => {
+export const ClassCard: React.FC = () => {
   return (
     <Card
-      className="card"
-      style={{ width: 300 }}
+      className="card hoverEffect"
+      style={{ width: '100%' }}
       cover={
         <img
           alt="example"

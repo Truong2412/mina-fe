@@ -1,14 +1,54 @@
-import React from 'react'
-import { Row, Col, Avatar, Badge } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Row, Col, Avatar, Badge, Switch } from 'antd'
 import { ShoppingCartOutlined, SettingOutlined } from '@ant-design/icons'
-import './style.css'
+import MenuTop from '@/components/menu/MenuTop'
+import { useTheme } from '@/hooks'
+import { lightTheme } from '@/contexts/ThemeContext'
 
-export const AppHeader: React.FC = () => {
+export default function AppHeader() {
+  const { theme, changeTheme } = useTheme()
+  const [activeSwitch, setActiveSwitch] = useState(false)
+  useEffect(() => {
+    let active = false
+    if (theme === lightTheme) {
+      active = true
+    }
+    setActiveSwitch(active)
+  }, [theme])
+
   return (
-    <Row>
-      <Col md={{ span: 12 }}></Col>
-      <Col md={{ span: 12 }}>
-        <Row justify="end">
+    <Row style={{ padding: '0 8px 0 8px' }} className={theme.section}>
+      <Col xl={5}>
+        <Row align="middle">
+          <Col>
+            <img
+              src="/favicon.ico"
+              alt="Trung tâm tiếng nhật Mina"
+              style={{ width: 60 }}
+            />
+          </Col>
+          <Col>
+            <p>Tiếng nhật cho mọi người</p>
+          </Col>
+        </Row>
+      </Col>
+      <Col xl={14}>
+        <MenuTop />
+      </Col>
+      <Col xl={5}>
+        <Row align="middle" justify="end">
+          <Col>
+            <Switch
+              checked={activeSwitch}
+              onChange={(checked: Boolean) =>
+                checked ? changeTheme('light') : changeTheme('dark')
+              }
+              checkedChildren="Sáng"
+              unCheckedChildren="Tối"
+            />
+          </Col>
+        </Row>
+        {/* <Row justify="end" align="middle">
           <Avatar />
           <span> Username</span>
           <Col>
@@ -22,7 +62,7 @@ export const AppHeader: React.FC = () => {
               className="icon"
             />
           </Col>
-        </Row>
+        </Row> */}
       </Col>
     </Row>
   )

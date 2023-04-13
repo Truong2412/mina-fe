@@ -1,34 +1,44 @@
-import React, { createContext, ReactNode, useCallback } from 'react'
-import { STORAGE, STORAGE_KEY, THEME } from '../const/app-const'
+import React, { createContext, ReactNode, useCallback, useState } from 'react'
+import { STORAGE, STORAGE_KEY } from '../const/app-const'
 import { useStorage } from '../hooks'
-import { themeContextType } from '../types/app-common-type'
+
+interface ThemeProps {
+  content: 'lightTheme' | 'darkTheme'
+  section: 'lightSection' | 'darkTheme'
+}
+
+export const lightTheme: ThemeProps = {
+  content: 'lightTheme',
+  section: 'lightSection'
+}
+
+export const darkTheme: ThemeProps = {
+  content: 'darkTheme',
+  section: 'darkTheme'
+}
+export interface themeContextType {
+  theme: ThemeProps
+  changeTheme: (newTheme: 'light' | 'dark') => void
+}
 
 const ThemeContext = createContext<themeContextType>({
-  theme: THEME.LIGHT.style,
-  changeTheme: (theme: string) => theme
+  theme: lightTheme,
+  changeTheme: () => {}
 })
 
 type Props = {
   children: ReactNode
 }
 
-const ThemeContextProvider: React.FC<Props> = ({ children }) => {
-  const [theme, setTheme] = useStorage(
-    STORAGE.LOCAL,
-    STORAGE_KEY.THEME,
-    THEME.LIGHT
-  )
-
-  const changeTheme = useCallback(
-    (theme: string) => {
-      if (theme === THEME.LIGHT.text) {
-        setTheme(THEME.LIGHT)
-      } else {
-        setTheme(THEME.DARK)
-      }
-    },
-    [setTheme]
-  )
+function ThemeContextProvider({ children }: Props) {
+  const [theme, setTheme] = useStorage(STORAGE.LOCAL, 'theme', lightTheme)
+  function changeTheme(newTheme: 'light' | 'dark') {
+    if (newTheme === 'light') {
+      setTheme(lightTheme)
+    } else {
+      setTheme(darkTheme)
+    }
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, changeTheme }}>
