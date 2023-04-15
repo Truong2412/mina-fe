@@ -9,6 +9,7 @@ import { CrownTwoTone } from '@ant-design/icons'
 import Link from 'next/link'
 import { AdminMenu } from '@/components/menu/AdminMenu'
 import { UserMenu } from '@/components/menu/UserMenu'
+import Image from 'next/image'
 
 export default function AppHeader() {
   const router = useRouter()
@@ -44,10 +45,11 @@ export default function AppHeader() {
       <Col xl={5}>
         <Row align="middle">
           <Col>
-            <img
-              src="/favicon.ico"
+            <Image
+              src="/favicon.svg"
               alt="Trung tâm tiếng nhật Mina"
-              style={{ width: 60 }}
+              width={60}
+              height={60}
             />
           </Col>
           <Col>

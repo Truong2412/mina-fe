@@ -7,7 +7,7 @@ import {
 } from '@/const/app-const'
 import { useLoading, useUser } from '@/hooks'
 import { checkRes } from '@/network/services/api-handler'
-import { CreateClassApi, CreateClassDto } from '@/pages/api/admin.api'
+import { CreateClassApi, CreateClassDto } from '@/pages/api/class.api'
 import {
   Button,
   Col,
@@ -96,32 +96,6 @@ export function NewClass() {
               placeholder="Level giảng dạy"
               allowClear
               options={classLevelOption}
-            />
-          </Form.Item>
-
-          <Form.Item
-            label="Số lượng tuyển"
-            name="numberOfStudents"
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập số học viên tối đa của lớp!'
-              },
-              {
-                validator: (rule, value) => {
-                  if (Number(value) > 4) {
-                    return Promise.resolve()
-                  } else {
-                    return Promise.reject('1 Lớp cần có ít nhất 5 học viên')
-                  }
-                }
-              }
-            ]}
-          >
-            <InputNumber
-              style={{ width: '100%' }}
-              placeholder="Số lượng tuyển sinh"
-              min={3}
             />
           </Form.Item>
 

@@ -11,18 +11,6 @@ export interface CreatePostDto {
   type: string
   content: string
 }
-//post
-async function CreatePostApi(
-  data: CreatePostDto
-): Promise<ResponseProps<string | null>> {
-  const url = `${API}/post`
-  const result = await apiHandler<string | null>({
-    method: METHOD.POST,
-    url: url,
-    data: data
-  })
-  return result
-}
 
 //class
 export interface CreateClassDto {
@@ -64,4 +52,4 @@ async function SearchClassApi(
   return result
 }
 
-export { CreatePostApi, CreateClassApi, SearchClassApi }
+export { CreateClassApi, SearchClassApi }

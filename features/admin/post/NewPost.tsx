@@ -3,7 +3,7 @@ import { CropImageUploader } from '@/components/upload-files/CropImageUploader'
 import { useLoading } from '@/hooks'
 import { Button, Checkbox, Col, Form, Input, Row, Select, message } from 'antd'
 import 'react-quill/dist/quill.snow.css'
-import { CreatePostApi, CreatePostDto } from '@/pages/api/admin.api'
+import { CreatePostApi, CreatePostDto } from '@/pages/api/post.api'
 import { checkRes } from '@/network/services/api-handler'
 
 export function NewPost(): JSX.Element {

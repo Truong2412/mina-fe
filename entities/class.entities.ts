@@ -10,12 +10,15 @@ export interface ClassProps {
     | CLASS_LEVEL.N5
   numberOfStudents: number
   cardImg: string
-  schedule: any
-  time: any
+  schedule: string[]
+  time: string[]
+  daysOfWeek: string[]
   description: string
   creatorId: string
   teacher?: string
   deleted: Boolean
   recruiting: Boolean
+  createdAt: string
+  numberOfRecruits: number
   status: CLASS_STATUS.OPEN | CLASS_STATUS.PROCESSING | CLASS_STATUS.END
 }

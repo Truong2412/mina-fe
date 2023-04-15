@@ -6,12 +6,12 @@ export function ClassManager(): JSX.Element {
   const items: TabsProps['items'] = [
     {
       key: 'classes',
-      label: `Quản lý lớp học`,
+      label: <span className="textTheme">Quản lý lớp học</span>,
       children: <ClassList />
     },
     {
       key: 'newclass',
-      label: `Tạo lớp mới`,
+      label: <span className="textTheme">Tạo lớp mới</span>,
       children: <NewClass />
     }
   ]
