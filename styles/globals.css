@@ -40,6 +40,10 @@ body {
   color: #d3eaf2;
 }
 
+.darkTheme label {
+  color: #fff;
+}
+
 .hoverEffect {
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -51,4 +55,30 @@ body {
 
 .highlightText:hover {
   color: #ab3232;
+}
+
+.relative {
+  position: relative;
+}
+
+.cardImgBox {
+  max-height: 200px;
+}
+
+.imgBg {
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+}
+
+@media screen and (min-width: 1200px) {
+  body,
+  * {
+    font-size: 14px;
+  }
+  .imgBg {
+    height: 160px;
+  }
 }

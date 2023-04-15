@@ -9,9 +9,8 @@ export default function MenuTop() {
   return (
     <Row align="middle" gutter={[8, 0]} justify="center">
       {menuitemsList.map((item, i) => (
-        <Col>
+        <Col key={`'Menu item ${i}`}>
           <h4
-            key={`'Menu item ${i}`}
             onClick={() => navigate(`/${item.path}`)}
             style={{ textAlign: 'center', cursor: 'pointer' }}
             className="highlightText"

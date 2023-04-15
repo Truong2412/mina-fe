@@ -1,4 +1,6 @@
+import { useRouter } from 'next/router'
 export const useActor = () => {
-  const actor = window.location.pathname.split('/')[1]
+  const router = useRouter()
+  const actor = router.pathname.split('/')[1]
   return actor
 }

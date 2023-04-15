@@ -1,4 +1,4 @@
-import { Row, Spin } from 'antd'
+import { Col, Row, Spin } from 'antd'
 import React from 'react'
 
 export const FullPageLoading: React.FC = () => {
@@ -7,15 +7,16 @@ export const FullPageLoading: React.FC = () => {
       align="middle"
       justify="center"
       style={{
-        position: 'fixed',
-        width: '100vw',
+        position: 'absolute',
+        width: '100%',
         height: '100vh',
-        // background: 'lightblue',
         zIndex: 9999,
         opacity: 1
       }}
     >
-      <Spin size="large" />
+      <Col>
+        <Spin size="large" />
+      </Col>
     </Row>
   )
 }

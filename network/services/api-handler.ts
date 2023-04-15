@@ -1,9 +1,15 @@
 import axios, { AxiosResponse } from 'axios'
-import { METHOD } from '../../const/app-const'
+import { METHOD, STORAGE_KEY } from '../../const/app-const'
 
 interface headerProps {
   'Content-Type'?: string
   'X-Access-Token'?: string
+}
+
+export interface ResponseProps<p> {
+  code: number
+  msg: string
+  data: p
 }
 interface apihanlderProps extends headerProps {
   url: string
@@ -15,18 +21,18 @@ interface headersProps {
   'x-access-token'?: string
   'Content-Type': 'application/json'
 }
-export async function apiHandler({
+export async function apiHandler<T>({
   url,
   method,
-  token,
   data
-}: apihanlderProps) {
+}: apihanlderProps): Promise<ResponseProps<T>> {
   const headers: headersProps = {
     'Content-Type': 'application/json'
   }
-  if (token) {
-    headers['x-access-token'] = token
-  }
+
+  headers['x-access-token'] =
+    window.sessionStorage.getItem(STORAGE_KEY.LOCAL_USER) ?? ''
+
   try {
     // console.log(headers)
     const response: AxiosResponse = await axios({
@@ -41,6 +47,35 @@ export async function apiHandler({
       throw new Error('no response - sender: `api-handler.ts`')
     }
   } catch (error: any) {
-    return error.response.data
+    return error
   }
+}
+
+import { RESPONSE_CODE } from '../../const/app-const'
+
+export interface PagingResponseProps<T> {
+  dataTable: T[]
+  paging: { page: number; pageSize: number }
+  totalCount: number
+}
+
+export function checkRes(
+  response: { code: number; msg: string; data: any } | null,
+  success: (props?: any) => void,
+  failed: (props?: any) => void,
+  always: (props?: any) => void
+) {
+  setTimeout(() => {
+    if (
+      (response !== null && response.code === RESPONSE_CODE.CREATED) ||
+      (response !== null && response.code === RESPONSE_CODE.OK)
+    ) {
+      if (response.data && response.data !== null) {
+        success()
+      }
+    } else {
+      failed()
+    }
+    always()
+  }, 1000)
 }

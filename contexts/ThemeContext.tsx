@@ -4,7 +4,7 @@ import { useStorage } from '../hooks'
 
 interface ThemeProps {
   content: 'lightTheme' | 'darkTheme'
-  section: 'lightSection' | 'darkTheme'
+  section: 'lightSection' | 'darkSection'
 }
 
 export const lightTheme: ThemeProps = {
@@ -14,7 +14,7 @@ export const lightTheme: ThemeProps = {
 
 export const darkTheme: ThemeProps = {
   content: 'darkTheme',
-  section: 'darkTheme'
+  section: 'darkSection'
 }
 export interface themeContextType {
   theme: ThemeProps

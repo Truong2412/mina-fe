@@ -3,7 +3,7 @@ import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
 import ImgCrop from 'antd-img-crop'
 import { message, Upload } from 'antd'
 import { ACCEPT_FILE } from '../../const/app-const'
-import { uploadFileApiURL } from '../../network/file-api'
+import { uploadFileApiURL } from '../../pages/api/file-api'
 import { useUser } from '../../hooks'
 
 // types
@@ -15,7 +15,7 @@ interface Props {
 //
 
 export const CropImageUploader: React.FC<Props> = ({ maxLength, setValue }) => {
-  const { token } = useUser()
+  const token = useUser().user.token
   const [fileList, setFileList] = useState<UploadFile[]>([])
   const [fileUploadedUrls, setFileUploadedUrls] = useState<string[]>([])
   const urlsMemo = useMemo(() => fileUploadedUrls, [fileUploadedUrls])
@@ -68,7 +68,7 @@ export const CropImageUploader: React.FC<Props> = ({ maxLength, setValue }) => {
   }
 
   return (
-    <ImgCrop rotate>
+    <ImgCrop>
       <Upload
         name="file"
         action={uploadFileApiURL}

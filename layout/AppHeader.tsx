@@ -1,23 +1,46 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Avatar, Badge, Switch } from 'antd'
-import { ShoppingCartOutlined, SettingOutlined } from '@ant-design/icons'
+import { Row, Col, Switch, Button, Avatar, Badge, Dropdown } from 'antd'
+import type { MenuProps } from 'antd'
 import MenuTop from '@/components/menu/MenuTop'
-import { useTheme } from '@/hooks'
-import { lightTheme } from '@/contexts/ThemeContext'
+import { useTheme, useUser } from '@/hooks'
+import { useRouter } from 'next/router'
+import { PATH, ROLE } from '@/const/app-const'
+import { CrownTwoTone } from '@ant-design/icons'
+import Link from 'next/link'
+import { AdminMenu } from '@/components/menu/AdminMenu'
+import { UserMenu } from '@/components/menu/UserMenu'
 
 export default function AppHeader() {
+  const router = useRouter()
+  const { user } = useUser()
   const { theme, changeTheme } = useTheme()
   const [activeSwitch, setActiveSwitch] = useState(false)
   useEffect(() => {
     let active = false
-    if (theme === lightTheme) {
+    const header = document.getElementById('header')
+    if (theme.section === 'lightSection') {
+      header?.classList.add('lightSection')
+      header?.classList.remove('darkSection')
+      console.log('sai ha')
       active = true
+    } else {
+      header?.classList.add('darkSection')
+      header?.classList.remove('lightSection')
     }
-    setActiveSwitch(active)
+    return setActiveSwitch(active)
   }, [theme])
 
+  function handleNavigate() {
+    router.push(`/${PATH.LOGIN}`)
+  }
+
   return (
-    <Row style={{ padding: '0 8px 0 8px' }} className={theme.section}>
+    <Row
+      id="header"
+      className="lightSection"
+      align="middle"
+      style={{ padding: '0 8px 0 8px' }}
+    >
       <Col xl={5}>
         <Row align="middle">
           <Col>
@@ -32,11 +55,41 @@ export default function AppHeader() {
           </Col>
         </Row>
       </Col>
+
       <Col xl={14}>
         <MenuTop />
       </Col>
+
       <Col xl={5}>
-        <Row align="middle" justify="end">
+        <Row gutter={[18, 0]} justify="end">
+          <Col>
+            <Row gutter={[4, 0]}>
+              {user.token && user.token !== '' ? (
+                <React.Fragment>
+                  <Col>
+                    <Avatar
+                      src={
+                        user.avatar ??
+                        'https://xsgames.co/randomusers/avatar.php?g=pixel'
+                      }
+                    />
+                  </Col>
+                  <Col>
+                    {user.role === ROLE.ADMIN || user.role === ROLE.STAFF ? (
+                      <AdminMenu userName={user.name ?? ''} role={user.role} />
+                    ) : (
+                      <UserMenu userName={user.name ?? ''} />
+                    )}
+                  </Col>
+                </React.Fragment>
+              ) : (
+                <Button type="primary" onClick={handleNavigate}>
+                  Đăng nhập
+                </Button>
+              )}
+            </Row>
+          </Col>
+
           <Col>
             <Switch
               checked={activeSwitch}
@@ -48,21 +101,6 @@ export default function AppHeader() {
             />
           </Col>
         </Row>
-        {/* <Row justify="end" align="middle">
-          <Avatar />
-          <span> Username</span>
-          <Col>
-            <Badge count={5}>
-              <ShoppingCartOutlined className="icon" />
-            </Badge>
-          </Col>
-          <Col push={1}>
-            <SettingOutlined
-              // onClick={() => handleOpenDrawer()}
-              className="icon"
-            />
-          </Col>
-        </Row> */}
       </Col>
     </Row>
   )
