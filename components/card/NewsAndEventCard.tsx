@@ -10,10 +10,11 @@ export const NewsAndEventCard: React.FC = () => {
     <Card
       className="card hoverEffect"
       cover={
-        <img
-          alt="example"
-          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-        />
+        <>s</>
+        // <img
+        //   alt="example"
+        //   src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+        // />
       }
       actions={[<SettingOutlined key="setting" />, <EditOutlined key="edit" />]}
     >

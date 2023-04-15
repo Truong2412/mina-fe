@@ -1,22 +1,23 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import { Col, Divider, Row, Typography } from 'antd'
-import { useTheme } from '@/hooks'
-import { API, textWhite } from '@/const/app-const'
+import { Col, Divider, Row } from 'antd'
+
+import { API } from '@/const/app-const'
 import { ClassCard } from '@/components'
 import { ClassProps } from '@/entities/class.entities'
-import { ResponseProps } from '@/network/services/api-handler'
+import { ResponseProps, checkRes } from '@/network/services/api-handler'
 import { PagingResponseProps } from '@/network/services/api-handler'
 import Link from 'next/link'
 import { PATH } from '@/const/app-const'
+import { useEffect, useState } from 'react'
+import { SearchClassApi } from './api/class.api'
+import { useLoading } from '@/hooks'
 
 const inter = Inter({ subsets: ['latin'] })
 interface HomeProps {
-  classesData: ClassProps[] | null
+  classesData: ClassProps[]
 }
-export default function Home({ classesData }: HomeProps) {
-  console.log(classesData)
+function Home({ classesData }: HomeProps) {
   return (
     <>
       <Head>
@@ -28,6 +29,7 @@ export default function Home({ classesData }: HomeProps) {
       <main>
         {/* banner and effect, regis form */}
         <div style={{ width: '100%', position: 'relative' }}>
+          {/* con me no cai anh ma` no loi~ hoai` ` */}
           <img
             src="/banner.jpeg"
             alt="mina - tieng nhat cho moi nguoi"
@@ -43,7 +45,7 @@ export default function Home({ classesData }: HomeProps) {
             <Row gutter={[16, 16]} justify="center">
               {classesData &&
                 classesData.map((item, i) => (
-                  <Col xxl={5}>
+                  <Col xxl={5} key={`class mina ${i}`}>
                     <Link href={`/${PATH.CLASS}/${item._id}`}>
                       <ClassCard
                         type="admin"
@@ -130,14 +132,17 @@ export default function Home({ classesData }: HomeProps) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res: Response = await fetch(
     `${API}/class/search?status=0&page=1&pageSize=20`
   )
-  const classes: ResponseProps<PagingResponseProps<ClassProps[] | null>> =
+  const classes: ResponseProps<PagingResponseProps<ClassProps[]>> =
     await res.json()
-  const classesData = classes.data.dataTable
+  const classesData = classes.data.dataTable ?? []
+
   return {
     props: { classesData }
   }
 }
+
+export default Home

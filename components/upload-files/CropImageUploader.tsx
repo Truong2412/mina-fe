@@ -23,7 +23,7 @@ export const CropImageUploader: React.FC<Props> = ({ maxLength, setValue }) => {
   //for reuturn new field Values
   useEffect(() => {
     setValue(urlsMemo)
-  }, [urlsMemo])
+  }, [urlsMemo, setValue])
 
   //set urls file uploaded
   useEffect(() => {
