@@ -134,7 +134,7 @@ function Home({ classesData }: HomeProps) {
 
 export async function getServerSideProps() {
   const res: Response = await fetch(
-    `${API}/class/search?status=0&page=1&pageSize=20`
+    `${API}/class/search?page=1&pageSize=20&recruiting=true`
   )
   const classes: ResponseProps<PagingResponseProps<ClassProps[]>> =
     await res.json()
