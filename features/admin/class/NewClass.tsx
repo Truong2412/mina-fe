@@ -53,7 +53,7 @@ export function NewClass() {
 
   return (
     <Row>
-      <Col xxl={18}>
+      <Col className="roundedBox" xxl={18}>
         <Form
           form={form}
           name="newClass"
@@ -64,7 +64,7 @@ export function NewClass() {
           //  onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item
+          {/* <Form.Item
             name="cardImg"
             label="Ảnh đại diện cho lớp tuyển sinh"
             rules={[
@@ -80,11 +80,11 @@ export function NewClass() {
                 form.setFieldValue('cardImg', value[0])
               }
             />
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item
             name="classLevel"
-            label="Level giảng dạy"
+            label={<label className="textTheme">Level giảng dạy</label>}
             rules={[
               {
                 required: true,
@@ -100,12 +100,28 @@ export function NewClass() {
           </Form.Item>
 
           <Form.Item
-            label="Ngày học trong 1 tuần"
+            label={<label className="textTheme">Số buổi học</label>}
+            name="numberOfLessons"
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng điền đầy đủ thông tin!'
+              }
+            ]}
+          >
+            <InputNumber
+              style={{ width: '100%' }}
+              min={1}
+              placeholder="Số buổi học"
+            />
+          </Form.Item>
+          <Form.Item
+            label={<label className="textTheme">Ngày học trong 1 tuần</label>}
             name="daysOfWeek"
             rules={[
               {
                 required: true,
-                message: 'Vui lòng chọn ngày học  trong 1 tuần!'
+                message: 'Vui lòng chọn ngày học trong 1 tuần!'
               }
             ]}
           >
@@ -117,8 +133,8 @@ export function NewClass() {
           </Form.Item>
 
           <Form.Item
-            name="schedule"
-            label="Thời gian khoá học"
+            name="startDate"
+            label={<label className="textTheme">Ngày khai giảng</label>}
             rules={[
               {
                 required: true,
@@ -126,15 +142,15 @@ export function NewClass() {
               }
             ]}
           >
-            <DatePicker.RangePicker
+            <DatePicker
+              placeholder="Ngày khai giảng"
               style={{ width: '100%' }}
-              placeholder={['Ngày bắt đầu', ' Ngày dự kiến kết thúc']}
             />
           </Form.Item>
 
           <Form.Item
             name="time"
-            label="Giờ học"
+            label={<label className="textTheme">Giờ học</label>}
             rules={[
               {
                 required: true,
@@ -150,7 +166,7 @@ export function NewClass() {
 
           <Form.Item
             name="description"
-            label="Mô tả - thông tin thêm"
+            label={<label className="textTheme">Mô tả - thông tin thêm</label>}
             rules={[
               {
                 required: true,

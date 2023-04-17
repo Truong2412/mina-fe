@@ -1,4 +1,5 @@
 import { CLASS_LEVEL, CLASS_STATUS } from '@/const/app-const'
+import { LogProps } from './common.entities'
 
 export interface ClassProps {
   _id?: string
@@ -9,16 +10,17 @@ export interface ClassProps {
     | CLASS_LEVEL.N4
     | CLASS_LEVEL.N5
   numberOfStudents: number
-  cardImg: string
-  schedule: string[]
-  time: string[]
+  numberOfLessons: number
+  startDate: string
+  time: any
   daysOfWeek: string[]
   description: string
   creatorId: string
   teacher?: string
   deleted: Boolean
   recruiting: Boolean
-  createdAt: string
-  numberOfRecruits: number
+  logs: LogProps[]
   status: CLASS_STATUS.OPEN | CLASS_STATUS.PROCESSING | CLASS_STATUS.END
+  createdAt: string
+  updatedAt: string
 }

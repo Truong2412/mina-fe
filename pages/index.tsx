@@ -52,11 +52,10 @@ function Home({ classesData }: HomeProps) {
                         daysOfWeek={item.daysOfWeek}
                         createdAt={item.createdAt}
                         classLevel={item.classLevel}
-                        cardImg={item.cardImg}
-                        numberOfRecruits={item.numberOfRecruits}
                         numberOfStudents={item.numberOfStudents}
+                        numberOfLessons={item.numberOfLessons}
                         recruiting={item.recruiting}
-                        schedule={item.schedule}
+                        startDate={item.startDate}
                         status={item.status}
                         time={item.time}
                       />
@@ -133,15 +132,21 @@ function Home({ classesData }: HomeProps) {
 }
 
 export async function getServerSideProps() {
-  const res: Response = await fetch(
-    `${API}/class/search?page=1&pageSize=20&recruiting=true`
-  )
-  const classes: ResponseProps<PagingResponseProps<ClassProps[]>> =
-    await res.json()
-  const classesData = classes.data.dataTable ?? []
+  try {
+    const res: Response = await fetch(
+      `${API}/class/search?page=1&pageSize=20&recruiting=true`
+    )
+    const classes: ResponseProps<PagingResponseProps<ClassProps[]>> =
+      await res.json()
+    const classesData = classes.data.dataTable ?? []
 
-  return {
-    props: { classesData }
+    return {
+      props: { classesData }
+    }
+  } catch (error) {
+    return {
+      props: { classesData: [] }
+    }
   }
 }
 
