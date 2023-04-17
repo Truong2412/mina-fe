@@ -10,11 +10,11 @@ interface ClassCardProps {
   _id?: string
   status?: number
   time?: string[]
-  schedule?: string[]
+  startDate?: string
   recruiting?: Boolean
   daysOfWeek: string[]
   numberOfStudents?: number
-  numberOfRecruits?: number
+  numberOfLessons?: number
   createdAt?: string
   classLevel?: string
   cardImg?: string
@@ -22,12 +22,13 @@ interface ClassCardProps {
 
 export function ClassCard({
   type,
-  schedule,
+  startDate,
   status,
   time,
   daysOfWeek,
   recruiting,
   numberOfStudents,
+  numberOfLessons,
   cardImg,
   classLevel,
   createdAt
@@ -92,6 +93,9 @@ export function ClassCard({
         <Meta title={title} description={scheduleText} />
         {daysOfWeek !== undefined && (
           <Meta description={daysOfWeek.toString()} />
+        )}
+        {numberOfLessons !== undefined && (
+          <Meta description={`${numberOfLessons} buổi học`} />
         )}
       </Card>
     </Badge.Ribbon>

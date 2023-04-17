@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect } from 'react'
-import { Layout, Row } from 'antd'
+import { Layout, Row, message } from 'antd'
 import { AppFooter } from './AppFooter'
 import { useLoading, useTheme, useUser } from '../hooks'
 import { FullPageLoading } from '../components/loading/FullPageLoading'
@@ -28,7 +28,19 @@ export const AppLayout: React.FC<Props> = ({ children }) => {
       footer?.classList.replace('lightSection', 'darkSection')
     }
   }, [theme])
-  // const [collapsed, setCollapsed] = useState(false)
+  const [messageApi, contextHolder] = message.useMessage();
+  useEffect(()=>{
+    if(isLoading){
+      messageApi.open({
+        key:'loadingmsg',
+        type: 'loading',
+        content: 'Vui lòng chờ ...',
+      })
+    }else{
+      messageApi.destroy('loadingmsg')
+    }
+  },[isLoading])
+
   return (
     <Row style={{ background: 'lightgray' }}>
       <Layout
@@ -40,7 +52,7 @@ export const AppLayout: React.FC<Props> = ({ children }) => {
           position: 'relative'
         }}
       >
-        {isLoading && <FullPageLoading />}
+        {contextHolder}
 
         <AppHeader />
 

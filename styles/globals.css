@@ -14,11 +14,9 @@ body {
 
 .lightTheme {
   background: linear-gradient(
-    180deg,
-    rgba(195, 34, 40, 1) 0%,
-    rgba(226, 131, 131, 1) 50%,
-    rgba(231, 126, 126, 0.9948354341736695) 76%,
-    rgba(223, 57, 63, 1) 100%
+    0deg,
+    rgba(237, 62, 62, 0.8267682072829132) 0%,
+    rgba(237, 62, 62, 0.258140756302521) 100%
   );
   color: #fff;
 }
@@ -36,6 +34,17 @@ body {
   color: #000000d0;
 }
 
+.textBox {
+  background: #ece1e1;
+  padding: 0.5rem 0.7rem 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+  color: #000000d0;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  text-align: start;
+  width: 100%;
+}
+
 .lightTheme *.hightlightText {
   color: #ab3232;
 }
@@ -50,7 +59,7 @@ body {
 }
 
 .darkTheme .textTheme {
-  color: #fff;
+  color: #d0cece;
 }
 .darkTheme .roundedBox {
   background: linear-gradient(150deg, rgb(12, 51, 52) 0%, rgb(61, 35, 52) 100%);
@@ -92,6 +101,19 @@ body {
   border-radius: 0.5rem;
   background: #fff;
 }
+.imgColBox {
+  position: relative;
+  width: 100%;
+}
+.imgCardBox {
+  position: relative;
+  width: 100%;
+}
+
+.richTextBox p img {
+  margin: 0 auto;
+  max-width: 100%;
+}
 
 @media screen and (min-width: 1200px) {
   body,
@@ -100,5 +122,14 @@ body {
   }
   .imgBg {
     height: 160px;
+  }
+  .imgCardBox {
+    height: 160px;
+  }
+  .imgColBox {
+    height: 300px;
+  }
+  .richTextBox p img {
+    max-height: 400px;
   }
 }

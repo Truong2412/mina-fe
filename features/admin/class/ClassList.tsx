@@ -141,11 +141,10 @@ export function ClassList() {
                   daysOfWeek={item.daysOfWeek}
                   createdAt={item.createdAt}
                   classLevel={item.classLevel}
-                  cardImg={item.cardImg}
-                  numberOfRecruits={item.numberOfRecruits}
+                  numberOfLessons={item.numberOfLessons}
                   numberOfStudents={item.numberOfStudents}
                   recruiting={item.recruiting}
-                  schedule={item.schedule}
+                  startDate={item.startDate}
                   status={item.status}
                   time={item.time}
                 />

@@ -16,6 +16,7 @@ import { ClassManager } from './class/ClassManager'
 import { NotFoundPage } from '@/components/notFoundPage/NotFoundPage'
 import { Posted } from './post/Posted'
 import { NewPost } from './post/NewPost'
+import { RegisClassManager } from './regisClass/RegisClassManager'
 
 // import { useNavigate } from 'react-router'
 type MenuItem = Required<MenuProps>['items'][number]
@@ -42,6 +43,10 @@ export const adminNavOption = [
     component: <ClassManager />
   },
   {
+    key: 'regis-class',
+    component: <RegisClassManager />
+  },
+  {
     key: 'post',
     component: null,
     child: [
@@ -61,6 +66,11 @@ export const adminNav: MenuItem[] = [
   getItem(
     'Lớp học',
     `class`,
+    <ShopOutlined style={{ fontSize: '1.5rem', color: 'blue' }} />
+  ),
+  getItem(
+    'Đơn đăng ký học',
+    `regis-class`,
     <ShopOutlined style={{ fontSize: '1.5rem', color: 'blue' }} />
   ),
   // getItem(

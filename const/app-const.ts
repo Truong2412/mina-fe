@@ -91,7 +91,8 @@ export enum CLASS_LEVEL {
   N2 = 'N2',
   N3 = 'N3',
   N4 = 'N4',
-  N5 = 'N5'
+  N5 = 'N5',
+  N5B = 'N5B'
 }
 
 export const classLevelOption = [
@@ -114,6 +115,10 @@ export const classLevelOption = [
   {
     label: CLASS_LEVEL.N5,
     value: CLASS_LEVEL.N5
+  },
+  {
+    label: CLASS_LEVEL.N5B,
+    value: CLASS_LEVEL.N5B
   }
 ]
 
