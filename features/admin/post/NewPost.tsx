@@ -34,7 +34,7 @@ export function NewPost(): JSX.Element {
       }
     )
   }
-
+  const [form] = Form.useForm()
   return (
     <Row justify="center">
       <Col xxl={18}>
@@ -79,10 +79,23 @@ export function NewPost(): JSX.Element {
               ]}
             />
           </Form.Item>
-          {/* TODO: ẢNH BÀI ĐĂNG */}
-          {/* <Form.Item name="image" label="Ảnh hiển thị cho thẻ của bài đăng">
-           <CropImageUploader maxLength={1} />
-          </Form.Item> */}
+          <Form.Item
+            name="cardImg"
+            label="Ảnh đại diện cho bài đăng"
+            rules={[
+              {
+                required: true,
+                message: 'Cần tải lên ít nhất 1 ảnh'
+              }
+            ]}
+          >
+            <CropImageUploader
+              maxLength={1}
+              setValue={(value: string[]) =>
+                form.setFieldValue('cardImg', value[0])
+              }
+            />
+          </Form.Item>
           <Form.Item
             name="content"
             label="Nội dung"

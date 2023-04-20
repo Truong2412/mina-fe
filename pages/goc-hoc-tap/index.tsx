@@ -11,15 +11,15 @@ import Link from 'next/link'
 import { POST_STATUS, POST_TYPE } from '@/const/app-const'
 import { removeMark } from '@/ultis/dataConvert'
 
-export default function ListNewsAndEvents() {
+export default function StudySpace() {
   const [filter, setFilter] = useState({
     page: 1,
     pageSize: 8,
     status: POST_STATUS.APPROVED,
-    type: POST_TYPE.NEWS
+    type: POST_TYPE.STUDY
   })
   const [params, setParams] = useState<string>(
-    'page=1&pageSize=8&type=news&status=1'
+    'page=1&pageSize=8&type=study&status=1'
   )
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function ListNewsAndEvents() {
     setParams(searchParamsString)
   }, [filter])
 
-  const { isLoading, data } = useQuery(['getListNews', params], () =>
+  const { isLoading, data } = useQuery(['getListStudy', params], () =>
     SearchPostApi(params)
   )
 
@@ -83,40 +83,13 @@ export default function ListNewsAndEvents() {
             data.data?.dataTable.map((item, i) => (
               <Col key={`su kien mina ${i}`} xxl={5}>
                 <Link
-                  href={`/tin-tuc-&-su-kien/${removeMark(item.title)}&pid${
-                    item._id
-                  }`}
+                  href={`/goc-hoc-tap/${removeMark(item.title)}&pid${item._id}`}
                 >
                   <NewsAndEventCard {...item} />
                 </Link>
               </Col>
             ))}
-          {/* <Col>
-        <NewsAndEventCard type='student' createdAt='ngay tao' />
-        </Col>
-        <Col>
-        <NewsAndEventCard type='student' createdAt='ngay tao' />
-        </Col>
-        <Col>
-        <NewsAndEventCard type='student' createdAt='ngay tao' />
-        </Col>
-        <Col>
-        <NewsAndEventCard type='student' createdAt='ngay tao' />
-        </Col>
-      </Row>
-      <Row gutter={[60, 0]} justify='center' style={{marginBottom:'40px'}}>
-        <Col>
-        <NewsAndEventCard type='student' createdAt='ngay tao' />
-        </Col>
-        <Col>
-        <NewsAndEventCard type='student' createdAt='ngay tao' />
-        </Col>
-        <Col>
-        <NewsAndEventCard type='student' createdAt='ngay tao' />
-        </Col>
-        <Col>
-        <NewsAndEventCard type='student' createdAt='ngay tao' />
-        </Col> */}
+
           <Col span={24}>
             <Row justify="center">
               <Pagination

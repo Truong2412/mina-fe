@@ -1,12 +1,29 @@
 import { ResponseProps } from '@/network/services/api-handler'
 import { API, METHOD } from '../../const/app-const'
 import { UserProps } from '@/entities/user.entities'
-import { localToken } from '@/ultis/useActor'
 
 const PATH = `${API}/user`
 
-async function RegisterApi(data: any): Promise<ResponseProps<string | null>> {
-  const url = `${PATH}/register`
+export interface LoginApiProps {
+  email: string
+  password: string
+}
+
+interface loginResult {
+  accessToken: string
+}
+
+export interface RegisAccountApiProps {
+  name: string
+  gender: string
+  yOB: number
+  password: string
+  email: string
+}
+async function RegisAccountApi(
+  data: RegisAccountApiProps
+): Promise<ResponseProps<null>> {
+  const url = `${PATH}`
   const response = await fetch(url, {
     method: METHOD.POST,
     headers: {
@@ -16,15 +33,6 @@ async function RegisterApi(data: any): Promise<ResponseProps<string | null>> {
   })
   const result = await response.json()
   return result
-}
-
-export interface LoginApiProps {
-  email: string
-  password: string
-}
-
-interface loginResult {
-  accessToken: string
 }
 
 async function LoginWithAccountApi(
@@ -56,4 +64,4 @@ async function AuthenApi(
   return result
 }
 
-export { RegisterApi, LoginWithAccountApi, AuthenApi }
+export { RegisAccountApi, LoginWithAccountApi, AuthenApi }

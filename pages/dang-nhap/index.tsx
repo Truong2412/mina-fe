@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { checkRes } from '@/network/services/api-handler'
 import { useMutation } from 'react-query'
+import Image from 'next/image'
 
 export default function Login(): JSX.Element {
   const router = useRouter()
@@ -49,7 +50,9 @@ export default function Login(): JSX.Element {
         style={{ padding: 16 }}
       >
         <Row justify="center" style={{ marginBottom: 20 }}>
-          logo
+          <Col>
+            <Image src={`/favicon.svg`} alt="mina" width={80} height={80} />
+          </Col>
         </Row>
         <Form
           autoComplete="true"

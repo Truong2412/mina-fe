@@ -1,6 +1,7 @@
 import { NotFoundPage } from '@/components/notFoundPage/NotFoundPage'
-import { ROLE } from '@/const/app-const'
+import { PATH, ROLE } from '@/const/app-const'
 import { useUser } from '@/hooks'
+import Link from 'next/link'
 import React, { ReactNode, useEffect, useState } from 'react'
 interface ProtectPageProps {
   role: ROLE
@@ -19,7 +20,13 @@ export function ProtectPage({ role, children }: ProtectPageProps): JSX.Element {
   }, [user])
   return (
     <React.Fragment>
-      {allow ? <>{children}</> : <NotFoundPage />}
+      {allow ? (
+        <>{children}</>
+      ) : (
+        <Link href={`/${PATH.LOGIN}`}>
+          <h3 style={{ textAlign: 'center' }}>Click để đăng nhập</h3>
+        </Link>
+      )}
     </React.Fragment>
   )
 }
