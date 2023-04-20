@@ -1,17 +1,26 @@
 import { RichTextEditor } from '@/components/richTexteditor/RichTextEditor'
 import { CropImageUploader } from '@/components/upload-files/CropImageUploader'
-import { useLoading } from '@/hooks'
+import { useLoading, useUser } from '@/hooks'
 import { Button, Checkbox, Col, Form, Input, Row, Select, message } from 'antd'
 import 'react-quill/dist/quill.snow.css'
-import { CreatePostApi, CreatePostDto } from '@/pages/api/post.api'
+import { CreatePostApi } from '@/pages/api/post.api'
 import { checkRes } from '@/network/services/api-handler'
+import { POST_STATUS, POST_TYPE } from '@/const/app-const'
+import { PostProps } from '@/entities/post.entities'
 
 export function NewPost(): JSX.Element {
+  const { user } = useUser()
   const { setIsLoading } = useLoading()
-  async function createNewPost(values: CreatePostDto) {
-    console.log(values)
+  async function createNewPost(values: PostProps) {
     setIsLoading(true)
-    const result = await CreatePostApi(values)
+    const result = await CreatePostApi({
+      ...values,
+      status: POST_STATUS.APPROVED,
+      author: {
+        id: user._id ?? '',
+        name: user.name ?? ''
+      }
+    })
     checkRes(
       result,
       () => {
@@ -65,8 +74,8 @@ export function NewPost(): JSX.Element {
               placeholder="Loại bài đăng"
               allowClear
               options={[
-                { value: 'news', label: 'Tin tức - Sự kiện' },
-                { value: 'study', label: 'Góc học tập' }
+                { value: POST_TYPE.NEWS, label: 'Tin tức - Sự kiện' },
+                { value: POST_TYPE.STUDY, label: 'Góc học tập' }
               ]}
             />
           </Form.Item>

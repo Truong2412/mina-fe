@@ -1,22 +1,36 @@
-import { ResponseProps, apiHandler } from '@/network/services/api-handler'
-import { API, CLASS_LEVEL, METHOD } from '../../const/app-const'
+import {
+  PagingResponseProps,
+  ResponseProps
+} from '@/network/services/api-handler'
+import { API, METHOD } from '../../const/app-const'
+import { localToken } from '@/ultis/useActor'
+import { PostProps } from '@/entities/post.entities'
 
-export interface CreatePostDto {
-  title: string
-  type: string
-  content: string
-}
-//post
 async function CreatePostApi(
-  data: CreatePostDto
+  data: PostProps
 ): Promise<ResponseProps<string | null>> {
   const url = `${API}/post`
-  const result = await apiHandler<string | null>({
+  const response = await fetch(url, {
     method: METHOD.POST,
-    url: url,
-    data: data
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': localToken ?? ''
+    },
+    body: JSON.stringify(data)
   })
+  const result = await response.json()
   return result
 }
 
-export { CreatePostApi }
+async function SearchPostApi(
+  params: string
+): Promise<ResponseProps<PagingResponseProps<PostProps> | null>> {
+  const url = `${API}/post/search?${params}`
+  const response = await fetch(url, {
+    method: METHOD.GET
+  })
+  const result = await response.json()
+  return result
+}
+
+export { CreatePostApi, SearchPostApi }

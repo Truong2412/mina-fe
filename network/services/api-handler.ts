@@ -38,7 +38,7 @@ export async function apiHandler<T>({
     const response: AxiosResponse = await axios({
       method: method,
       url: url,
-      data,
+      data: JSON.stringify(data) ?? undefined,
       headers: { ...headers }
     })
     if (response) {

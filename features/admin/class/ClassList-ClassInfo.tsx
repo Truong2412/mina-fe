@@ -1,11 +1,29 @@
 import { CLASS_STATUS } from '@/const/app-const'
 import { ClassProps } from '@/entities/class.entities'
-import { Button, Col, Divider, Row, Select, Space } from 'antd'
+import { RegisClassProps } from '@/entities/regisClass.entities'
+import { SearchStudentApi } from '@/pages/api/student.api'
+import { Button, Col, Divider, Row, Select, Space, Tabs, TabsProps } from 'antd'
 import React, { useState } from 'react'
+import { useQuery } from 'react-query'
 
 export function ClassInfo(detail: ClassProps): JSX.Element {
-  console.log(detail)
   const [saveAble, setSaveAble] = useState(false)
+  const items: TabsProps['items'] = [
+    {
+      key: 'classes',
+      label: <span className="textTheme">Thông tin lớp</span>,
+      children: <Info {...detail} />
+    },
+    {
+      key: 'newclass',
+      label: <span className="textTheme">Học viên</span>,
+      children: <Students classId={detail._id} />
+    }
+  ]
+  return <Tabs items={items} />
+}
+
+function Info(detail: ClassProps) {
   return (
     <React.Fragment>
       <Divider className="textTheme">Thông tin lớp học</Divider>
@@ -53,5 +71,35 @@ export function ClassInfo(detail: ClassProps): JSX.Element {
         )}
       </Row>
     </React.Fragment>
+  )
+}
+
+function Students({ classId }: { classId: string | undefined }) {
+  const { data } = useQuery(['getListStudent', classId], () => {
+    if (classId !== undefined) {
+      return SearchStudentApi(`classId=${classId}&page=1&pageSize=200`)
+    }
+  })
+  if (data) {
+    console.log(data.data?.dataTable)
+  }
+
+  return (
+    <Row>
+      {data !== undefined &&
+        data !== null &&
+        data.data?.dataTable !== undefined &&
+        data.data?.dataTable.map((item, i) => {
+          if (item.regisInfo !== undefined) {
+            return (
+              <Col className="textTheme" key={`student ${i} ${classId}`}>{`${
+                i + 1
+              }:  ${item.regisInfo[0].name}-${item.regisInfo[0].phone}-${
+                item.regisInfo[0].email
+              }`}</Col>
+            )
+          }
+        })}
+    </Row>
   )
 }

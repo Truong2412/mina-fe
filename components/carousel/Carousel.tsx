@@ -1,6 +1,4 @@
-import React from 'react'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+import React, { ReactNode } from 'react'
 import Slider from 'react-slick'
 
 interface Props {
@@ -9,6 +7,7 @@ interface Props {
   speed: number
   slideToShow: number
   slideToScroll: number
+  children: ReactNode
 }
 
 export const Carousel: React.FC<Props> = ({
@@ -16,7 +15,8 @@ export const Carousel: React.FC<Props> = ({
   infinite,
   speed,
   slideToShow,
-  slideToScroll
+  slideToScroll,
+  children
 }) => {
   const settings = {
     dots: dots,
@@ -25,26 +25,5 @@ export const Carousel: React.FC<Props> = ({
     slidesToShow: slideToShow,
     slidesToScroll: slideToScroll
   }
-  return (
-    <Slider {...settings}>
-      <div>
-        <h3>1</h3>
-      </div>
-      <div>
-        <h3>2</h3>
-      </div>
-      <div>
-        <h3>3</h3>
-      </div>
-      <div>
-        <h3>4</h3>
-      </div>
-      <div>
-        <h3>5</h3>
-      </div>
-      <div>
-        <h3>6</h3>
-      </div>
-    </Slider>
-  )
+  return <Slider {...settings}>{children}</Slider>
 }

@@ -23,9 +23,15 @@ export function UserMenu({ userName }: UserMenuProps): JSX.Element {
 
   return (
     <Dropdown menu={{ items }} trigger={['click']} placement="bottom" arrow>
-      <span style={{ lineHeight: '2.3rem', cursor: 'pointer' }}>
+      <div
+        style={{
+          lineHeight: '2.3rem',
+          cursor: 'pointer',
+          color: 'white'
+        }}
+      >
         {userName}
-      </span>
+      </div>
     </Dropdown>
   )
 }

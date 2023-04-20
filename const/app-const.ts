@@ -63,10 +63,10 @@ export const menuitemsList = [
     path: PATH.ABOUT_US,
     label: 'Về MINA'
   },
-  {
-    path: PATH.CLASS_REGISTRATION,
-    label: 'Đăng ký học'
-  },
+  // {
+  //   path: PATH.CLASS_REGISTRATION,
+  //   label: 'Đăng ký học'
+  // },
   {
     path: PATH.COURSE,
     label: 'Khoá học'
@@ -152,3 +152,26 @@ export const dayOfWeekOption: SelectProps['options'] = [
     value: 'Chủ Nhật'
   }
 ]
+
+export enum REGIS_STATUS {
+  INIT = 0,
+  CHECKED = 1,
+  CONFIRMED = 2,
+  CANCELED = 3
+}
+
+export enum STUDENT_STATUS {
+  WAITING = 0,
+  STUDYING = 1,
+  DONE = 2,
+  CANCELED = 3
+}
+
+export enum POST_TYPE {
+  STUDY = 'study',
+  NEWS = 'news'
+}
+export enum POST_STATUS {
+  APPROVAL = 0,
+  APPROVED = 1
+}

@@ -5,37 +5,17 @@ import {
 import { API, CLASS_LEVEL, METHOD, REGIS_STATUS } from '../../const/app-const'
 import { RegisClassProps } from '@/entities/regisClass.entities'
 import { localToken } from '@/ultis/useActor'
+import { StudentProps } from '@/entities/student.entities'
 
-export interface CreatePostDto {
-  title: string
-  type: string
-  content: string
-}
-
-export interface CreateRegisClassDto {
-  name: string
-  phone: string
-  address: string
-  email: string
-  facebookLink: string
-  method: 0
-  classLevel: CLASS_LEVEL
-  knowFrom: string
-  everStudied: Boolean
-  leanTo: string
-  note: string
-  userId: string
-  classId: string
-}
-
-async function CreateRegisClassApi(
-  data: CreateRegisClassDto
+async function CreateStudentApi(
+  data: StudentProps
 ): Promise<ResponseProps<string | null>> {
-  const url = `${API}/regis-class`
+  const url = `${API}/student`
   const response = await fetch(url, {
     method: METHOD.POST,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-access-token': localToken ?? ''
     },
     body: JSON.stringify(data)
   })
@@ -79,16 +59,16 @@ async function DeleteRegisClassApi(id: string): Promise<ResponseProps<null>> {
   return result
 }
 
-export interface SearchRegisClassParamsProps {
+export interface SearchStudentParamsProps {
   page: number
   pageSize: number
-  status?: REGIS_STATUS
+  classId?: string
 }
 
-async function SearchRegisClassApi(
+async function SearchStudentApi(
   params: string
-): Promise<ResponseProps<PagingResponseProps<RegisClassProps> | null>> {
-  const url = `${API}/regis-class/search?${params}`
+): Promise<ResponseProps<PagingResponseProps<StudentProps> | null>> {
+  const url = `${API}/student/search?${params}`
   const response = await fetch(url, {
     method: METHOD.GET,
     headers: {
@@ -100,9 +80,4 @@ async function SearchRegisClassApi(
   return result
 }
 
-export {
-  CreateRegisClassApi,
-  SearchRegisClassApi,
-  DeleteRegisClassApi,
-  UpdateStatusRegisClassApi
-}
+export { CreateStudentApi, SearchStudentApi }

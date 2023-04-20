@@ -9,32 +9,32 @@ import { REGEX } from '../../const/regexp'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { checkRes } from '@/network/services/api-handler'
-export interface LoginApihandlerProps {
-  data: LoginApiProps
-}
+import { useMutation } from 'react-query'
+
 export default function Login(): JSX.Element {
   const router = useRouter()
   const { login } = useUser()
   const { setIsLoading } = useLoading()
 
-  const LoginApiHandler = async ({ data }: LoginApihandlerProps) => {
-    setIsLoading(true)
-    const result = await LoginWithAccountApi(data)
-    checkRes(
-      result,
-      () => {
+  const Login = useMutation(
+    (data: LoginApiProps) => LoginWithAccountApi(data),
+    {
+      onMutate: () => setIsLoading(true),
+      onSuccess: (result) => {
         if (result.data !== null) {
           login(result.data.accessToken)
           router.push(`/`)
         }
       },
-      () => {
-        message.error('Thông tin đăng nhập không chính xác!')
-      },
-      () => {
+      onError: () => {
         setIsLoading(false)
+        message.error('Tài khoản hoặc mật khẩu không chính xác!')
       }
-    )
+    }
+  )
+
+  function LoginHandler(values: LoginApiProps) {
+    Login.mutate(values)
   }
 
   return (
@@ -52,9 +52,10 @@ export default function Login(): JSX.Element {
           logo
         </Row>
         <Form
+          autoComplete="true"
           name="normal_login"
           initialValues={{ remember: true }}
-          onFinish={(values) => LoginApiHandler({ data: values })}
+          onFinish={(values) => LoginHandler(values)}
         >
           <Form.Item
             name="email"

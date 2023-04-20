@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import { Col, Divider, Row } from 'antd'
 
-import { API } from '@/const/app-const'
+import { API, POST_TYPE } from '@/const/app-const'
 import { ClassCard } from '@/components'
 import { ClassProps } from '@/entities/class.entities'
 import { ResponseProps, checkRes } from '@/network/services/api-handler'
@@ -12,12 +12,18 @@ import { PATH } from '@/const/app-const'
 import { useEffect, useState } from 'react'
 import { SearchClassApi } from './api/class.api'
 import { useLoading } from '@/hooks'
+import { SearchPostApi } from './api/post.api'
+import { PostProps } from '@/entities/post.entities'
 
 const inter = Inter({ subsets: ['latin'] })
 interface HomeProps {
-  classesData: ClassProps[]
+  classes: ClassProps[]
+  news: PostProps[]
+  study: PostProps[]
 }
-function Home({ classesData }: HomeProps) {
+function Home({ classes, news, study }: HomeProps) {
+  console.log(news, 'n')
+  console.log(study, 'st')
   return (
     <>
       <Head>
@@ -37,45 +43,10 @@ function Home({ classesData }: HomeProps) {
           />
         </div>
 
-        <Row>
-          <Divider>
-            <h3> Lớp học đang tuyển sinh</h3>
-          </Divider>
-          <Col span={24}>
-            <Row gutter={[16, 16]} justify="center">
-              {classesData &&
-                classesData.map((item, i) => (
-                  <Col xxl={5} key={`class mina ${i}`}>
-                    <Link href={`/${PATH.CLASS}/${item._id}`}>
-                      <ClassCard
-                        type="admin"
-                        daysOfWeek={item.daysOfWeek}
-                        createdAt={item.createdAt}
-                        classLevel={item.classLevel}
-                        numberOfStudents={item.numberOfStudents}
-                        numberOfLessons={item.numberOfLessons}
-                        recruiting={item.recruiting}
-                        startDate={item.startDate}
-                        status={item.status}
-                        time={item.time}
-                      />
-                    </Link>
-                  </Col>
-                ))}
-            </Row>
-          </Col>
-        </Row>
-        <h3
-          className="highLightText"
-          style={{ textAlign: 'center', cursor: 'pointer' }}
-        >
-          Xem thêm {'> >'}
-        </h3>
         {/* news and envents and  Studiy Space */}
-        <Row>
-          <Divider>
-            <h3>Tin tức và sự kiện</h3>
-          </Divider>
+        <Row style={{ marginTop: '1rem' }}>
+          <div className="titleSection textTheme">Tin tức và sự kiện</div>
+
           <Col span={24}>
             <Row gutter={[16, 16]} justify="center">
               {/* <Col xl={5}>
@@ -99,10 +70,45 @@ function Home({ classesData }: HomeProps) {
         >
           Xem thêm {'> >'}
         </h3>
+
+        <Row style={{ marginTop: '1rem' }}>
+          <div className="titleSection textTheme">Lớp học đang tuyển sinh</div>
+
+          <Col span={24}>
+            <Row gutter={[16, 16]} justify="center">
+              {classes &&
+                classes.map((item, i) => (
+                  <Col xxl={5} key={`class mina ${i}`}>
+                    <Link href={`/${PATH.CLASS}/${item._id}`}>
+                      <ClassCard
+                        type="student"
+                        daysOfWeek={item.daysOfWeek}
+                        createdAt={item.createdAt}
+                        classLevel={item.classLevel}
+                        numberOfStudents={item.numberOfStudents}
+                        numberOfLessons={item.numberOfLessons}
+                        recruiting={item.recruiting}
+                        startDate={item.startDate}
+                        status={item.status}
+                        time={item.time}
+                      />
+                    </Link>
+                  </Col>
+                ))}
+            </Row>
+          </Col>
+        </Row>
+        {classes.length > 8 && (
+          <h3
+            className="highLightText"
+            style={{ textAlign: 'center', cursor: 'pointer' }}
+          >
+            Xem thêm {'> >'}
+          </h3>
+        )}
+
         <Row>
-          <Divider>
-            <h3> Góc học tập</h3>
-          </Divider>
+          <div className="titleSection textTheme">Góc học tập</div>
           <Col span={24}>
             <Row gutter={[16, 16]} justify="center">
               {/* <Col xl={5}>
@@ -133,19 +139,28 @@ function Home({ classesData }: HomeProps) {
 
 export async function getServerSideProps() {
   try {
-    const res: Response = await fetch(
-      `${API}/class/search?page=1&pageSize=20&recruiting=true`
+    const getClassRecruiting = await SearchClassApi(
+      `page=1&pageSize=20&recruiting=true`
     )
-    const classes: ResponseProps<PagingResponseProps<ClassProps[]>> =
-      await res.json()
-    const classesData = classes.data.dataTable ?? []
+    const getStudyPost = await SearchPostApi(
+      `page=1&pageSize=8&status=1&type=${POST_TYPE.STUDY}`
+    )
+    const getNewsPost = await SearchPostApi(
+      `page=1&pageSize=8&status=1&type=${POST_TYPE.NEWS}`
+    )
 
     return {
-      props: { classesData }
+      props: {
+        classes: getClassRecruiting.data?.dataTable ?? [],
+        study: getStudyPost.data?.dataTable ?? [],
+        news: getNewsPost.data?.dataTable ?? []
+      }
     }
   } catch (error) {
     return {
-      props: { classesData: [] }
+      classes: [],
+      study: [],
+      news: []
     }
   }
 }
