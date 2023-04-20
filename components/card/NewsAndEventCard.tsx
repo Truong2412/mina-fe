@@ -1,24 +1,47 @@
 import React from 'react'
-import { SettingOutlined, EditOutlined } from '@ant-design/icons'
 import { Card } from 'antd'
+import Image from 'next/image'
+
 const { Meta } = Card
 
-// interface Props {}
+interface newsAndEventCardProps {
+  type: 'admin' | 'student'
+  _id?: string
+  status?: number
+  createdAt: string
+  cardImg?: string
+}
 
-export const NewsAndEventCard: React.FC = () => {
+
+export function NewsAndEventCard ({
+  type,
+  status,
+  cardImg,
+  createdAt
+}: newsAndEventCardProps): JSX.Element {
+  const imageUrl = cardImg ?? 'https://picsum.photos/260/260'
+  let title: string = 'Đây là tiêu đề'
+  let scheduleText: string = `Mô tả nè (${createdAt})`
+
   return (
     <Card
-      className="card hoverEffect"
+      className="hoverEffect"
+      style={{ width: 260 }}
       cover={
-        <>s</>
-        // <img
-        //   alt="example"
-        //   src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-        // />
+        <Image
+          alt="example"
+          src={imageUrl}
+          width={260}
+          height={260}
+        />
       }
-      actions={[<SettingOutlined key="setting" />, <EditOutlined key="edit" />]}
+      bodyStyle={{ padding: 0, margin: 0 }}
     >
-      <Meta title="Card title" description="This is the description" />
+      <Meta
+        title={title}
+        description={scheduleText}
+        style={{margin:0, padding:0}}
+      />
     </Card>
   )
 }
