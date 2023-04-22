@@ -31,7 +31,7 @@ export const STORAGE_KEY = {
   SECTIONTHEME: 'sectionTheme'
 }
 
-export const API = `https://minamvp.click/api`
+export const API = `${process.env.be_url}/api`
 
 export enum METHOD {
   GET = 'get',

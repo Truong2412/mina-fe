@@ -28,4 +28,7 @@ module.exports = {
     // Tắt cảnh báo khi sử dụng thẻ img bằng cách sử dụng next/image
     disableStaticImages: true,
   },
+  env: {
+    be_url: 'https://minamvp.click',
+  },
 }
