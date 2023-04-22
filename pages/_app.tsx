@@ -10,6 +10,7 @@ import 'slick-carousel/slick/slick-theme.css'
 
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { Sakura } from '@/components/sakuraEffect/sakura'
 
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
@@ -20,7 +21,8 @@ export default function App({ Component, pageProps }: AppProps) {
           <UserProvider>
             <Auth>
               <AppLayout>
-                <Component {...pageProps} />
+                <Sakura />
+                <Component {...pageProps}></Component>
               </AppLayout>
             </Auth>
           </UserProvider>
