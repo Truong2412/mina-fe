@@ -33,4 +33,15 @@ async function SearchPostApi(
   return result
 }
 
-export { CreatePostApi, SearchPostApi }
+async function GetPostByIdApi(
+  id: string
+): Promise<ResponseProps<PostProps | null>> {
+  const url = `${API}/post/id=${id}`
+  const response = await fetch(url, {
+    method: METHOD.GET
+  })
+  const result = await response.json()
+  return result
+}
+
+export { CreatePostApi, SearchPostApi, GetPostByIdApi }

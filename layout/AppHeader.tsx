@@ -22,7 +22,6 @@ export default function AppHeader() {
     if (theme.section === 'lightSection') {
       header?.classList.add('lightSection')
       header?.classList.remove('darkSection')
-      console.log('sai ha')
       active = true
     } else {
       header?.classList.add('darkSection')

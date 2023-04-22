@@ -1,47 +1,33 @@
 import React from 'react'
 import { Card } from 'antd'
 import Image from 'next/image'
+import { PostProps } from '@/entities/post.entities'
+import { formatDate } from '@/ultis/dataConvert'
 
-const { Meta } = Card
-
-interface newsAndEventCardProps {
-  type: 'admin' | 'student'
-  _id?: string
-  status?: number
-  createdAt: string
-  cardImg?: string
-}
-
-
-export function NewsAndEventCard ({
+export function NewsAndEventCard({
   type,
+  title,
   status,
+  author,
   cardImg,
   createdAt
-}: newsAndEventCardProps): JSX.Element {
+}: PostProps): JSX.Element {
   const imageUrl = cardImg ?? 'https://picsum.photos/260/260'
-  let title: string = 'Đây là tiêu đề'
-  let scheduleText: string = `Mô tả nè (${createdAt})`
+  const date = `Ngày đăng: ${formatDate(createdAt ?? '')}`
 
   return (
     <Card
       className="hoverEffect"
-      style={{ width: 260 }}
       cover={
-        <Image
-          alt="example"
-          src={imageUrl}
-          width={260}
-          height={260}
-        />
+        <div
+          className="relative imgBg"
+          style={{ backgroundImage: `url(${imageUrl})` }}
+        ></div>
       }
       bodyStyle={{ padding: 0, margin: 0 }}
     >
-      <Meta
-        title={title}
-        description={scheduleText}
-        style={{margin:0, padding:0}}
-      />
+      <div className="cardTitle">{title}</div>
+      <div className="cardDescription">{date}</div>
     </Card>
   )
 }

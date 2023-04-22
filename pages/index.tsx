@@ -13,6 +13,9 @@ import { SearchClassApi } from './api/class.api'
 import { useLoading } from '@/hooks'
 import { SearchPostApi } from './api/post.api'
 import { PostProps } from '@/entities/post.entities'
+import { Carousel } from '@/components/carousel/Carousel'
+import { NewsAndEventCard } from '@/components/card/NewsAndEventCard'
+import { removeMark } from '@/ultis/dataConvert'
 
 const inter = Inter({ subsets: ['latin'] })
 interface HomeProps {
@@ -21,8 +24,6 @@ interface HomeProps {
   study: PostProps[]
 }
 function Home({ classes, news, study }: HomeProps) {
-  console.log(news, 'n')
-  console.log(study, 'st')
   return (
     <>
       <Head>
@@ -48,27 +49,45 @@ function Home({ classes, news, study }: HomeProps) {
 
           <Col span={24}>
             <Row gutter={[16, 16]} justify="center">
-              {/* <Col xl={5}>
-                <ClassCard />
-              </Col>
-              <Col xl={5}>
-                <ClassCard />
-              </Col>
-              <Col xl={5}>
-                <ClassCard />
-              </Col>
-              <Col xl={5}>
-                <ClassCard />
-              </Col> */}
+              <Carousel>
+                {news.map((item, i) => (
+                  <Col key={`event ${i}`}>
+                    <Link
+                      href={`/tin-tuc-&-su-kien/${removeMark(item.title)}&pid${
+                        item._id
+                      }`}
+                    >
+                      <NewsAndEventCard {...item} />
+                    </Link>
+                  </Col>
+                ))}
+                <Col>óido ádio áo</Col>
+                <Col>óido ádio áo</Col>
+                <Col>óido ádio áo</Col>
+                <Col>óido ádio áo</Col>
+              </Carousel>
             </Row>
           </Col>
         </Row>
-        <h3
-          className="highLightText"
-          style={{ textAlign: 'center', cursor: 'pointer' }}
-        >
-          Xem thêm {'> >'}
-        </h3>
+        <Col span={24}>
+          <Row justify="center">
+            <Col>
+              <Link href={`/tin-tuc-&-su-kien`}>
+                <h3
+                  className="highlightText textTheme"
+                  style={{
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                    padding: '0.5rem',
+                    borderRadius: '0.5rem'
+                  }}
+                >
+                  Xem thêm {'> >'}
+                </h3>
+              </Link>
+            </Col>
+          </Row>
+        </Col>
 
         <Row style={{ marginTop: '1rem' }}>
           <div className="titleSection textTheme">Lớp học đang tuyển sinh</div>
@@ -98,39 +117,62 @@ function Home({ classes, news, study }: HomeProps) {
           </Col>
         </Row>
         {classes.length > 8 && (
-          <h3
-            className="highLightText"
-            style={{ textAlign: 'center', cursor: 'pointer' }}
-          >
-            Xem thêm {'> >'}
-          </h3>
+          <Col span={24}>
+            <Row justify="center">
+              <Col>
+                <h3
+                  className="highlightText textTheme"
+                  style={{
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                    padding: '0.5rem',
+                    borderRadius: '0.5rem'
+                  }}
+                >
+                  Xem thêm {'> >'}
+                </h3>
+              </Col>
+            </Row>
+          </Col>
         )}
 
         <Row>
           <div className="titleSection textTheme">Góc học tập</div>
           <Col span={24}>
             <Row gutter={[16, 16]} justify="center">
-              {/* <Col xl={5}>
-                <ClassCard />
-              </Col>
-              <Col xl={5}>
-                <ClassCard />
-              </Col>
-              <Col xl={5}>
-                <ClassCard />
-              </Col>
-              <Col xl={5}>
-                <ClassCard />
-              </Col> */}
+              {study.map((item, i) => (
+                <Col xxl={5} key={`card study ${i}`}>
+                  <Link
+                    href={`/goc-hoc-tap/${removeMark(item.title)}&pid${
+                      item._id
+                    }`}
+                  >
+                    <NewsAndEventCard {...item} />
+                  </Link>
+                </Col>
+              ))}
             </Row>
           </Col>
         </Row>
-        <h3
-          className="highLightText"
-          style={{ textAlign: 'center', cursor: 'pointer' }}
-        >
-          Xem thêm {'> >'}
-        </h3>
+        <Col span={24}>
+          <Row justify="center">
+            <Col>
+              <Link href={`/goc-hoc-tap`}>
+                <h3
+                  className="highlightText textTheme"
+                  style={{
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                    padding: '0.5rem',
+                    borderRadius: '0.5rem'
+                  }}
+                >
+                  Xem thêm {'> >'}
+                </h3>
+              </Link>
+            </Col>
+          </Row>
+        </Col>
       </main>
     </>
   )

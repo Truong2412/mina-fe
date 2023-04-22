@@ -5,7 +5,7 @@ import { Row } from 'antd'
 export default function TakeTheTest() {
   return (
     <ProtectPage role={ROLE.USER}>
-      <Row>that tuyet voi phai khong nao</Row>
+      <Row className="textTheme">COMMING SOON</Row>
     </ProtectPage>
   )
 }

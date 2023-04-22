@@ -81,7 +81,7 @@ export function ClassCard({
       }
     >
       <Card
-        className="card hoverEffect"
+        className="hoverEffect"
         style={{ width: '100%' }}
         cover={
           <div
@@ -90,12 +90,13 @@ export function ClassCard({
           ></div>
         }
       >
-        <Meta title={title} description={scheduleText} />
+        <div className="cardTitle">{title}</div>
+        <div className="cardDescription">{scheduleText}</div>
         {daysOfWeek !== undefined && (
-          <Meta description={daysOfWeek.toString()} />
+          <div className="cardDescription">{daysOfWeek.toString()}</div>
         )}
         {numberOfLessons !== undefined && (
-          <Meta description={`${numberOfLessons} buổi học`} />
+          <div className="cardDescription">{`${numberOfLessons} buổi học`}</div>
         )}
       </Card>
     </Badge.Ribbon>

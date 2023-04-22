@@ -7,6 +7,7 @@ import '@/styles/globals.css'
 import 'react-quill/dist/quill.snow.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Sakura } from '@/components/sakuraEffect/sakura'

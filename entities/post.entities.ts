@@ -4,6 +4,7 @@ export interface PostProps {
   _id?: string
   title: string
   type: string
+  cardImg: string
   author: {
     id: string
     name: string

@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // output: 'export',
+  // distDir: 'app',
   publicRuntimeConfig: {
-    favicon: './asset/minamg.png'
+    favicon: './public/favicon.svg'
   },
   images: {
+    unoptimized :true,
     remotePatterns: [
       {
         protocol: 'https',

@@ -1,8 +1,13 @@
 import React from 'react'
 import { PATH, ROLE } from '../../const/app-const'
 import { useActor } from '../../ultis/useActor'
-import { LockOutlined, UserOutlined, MobileOutlined } from '@ant-design/icons'
-import { RegisterApi } from '../api/user.api'
+import {
+  LockOutlined,
+  UserOutlined,
+  MobileOutlined,
+  MailOutlined
+} from '@ant-design/icons'
+import { RegisAccountApi, RegisAccountApiProps } from '../api/user.api'
 import {
   Button,
   Col,
@@ -18,31 +23,33 @@ import { REGEX } from '../../const/regexp'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { checkRes } from '@/network/services/api-handler'
+import Image from 'next/image'
+import { useMutation } from 'react-query'
 
 export default function Register(): JSX.Element {
   const router = useRouter()
-  const actor = useActor()
+
   const { setIsLoading } = useLoading()
-  const registerApiHandler = async (data: any) => {
-    console.log(data)
-    setIsLoading(true)
-    const registerResult = await RegisterApi(data)
-    checkRes(
-      registerResult,
-      () => {
+  const Register = useMutation(
+    (data: RegisAccountApiProps) => RegisAccountApi(data),
+    {
+      onMutate: () => {
+        setIsLoading(true)
+      },
+      onSuccess: () => {
+        setIsLoading(false)
         message.success('Đăng ký thành công!')
         router.push(`/${PATH.LOGIN}`)
       },
-      () => {
-        message.error('Đăng ký thất bại!')
-      },
-      () => {
+      onError: () => {
         setIsLoading(false)
+        message.error('Đã có lỗi xảy ra')
       }
-    )
-  }
+    }
+  )
+
   return (
-    <Row align="middle" justify="center" style={{ height: '90vh' }}>
+    <Row align="middle" justify="center" style={{ minHeight: '90vh' }}>
       <Col
         xs={{ span: 24 }}
         sm={{ span: 24 }}
@@ -52,16 +59,14 @@ export default function Register(): JSX.Element {
         style={{ padding: 16 }}
       >
         <Row justify="center" style={{ marginBottom: 20 }}>
-          logo
+          <Col>
+            <Image src={`/favicon.svg`} alt="mina" width={80} height={80} />
+          </Col>
         </Row>
         <Form
           name="normal_login"
           initialValues={{ remember: true }}
-          onFinish={(values) =>
-            registerApiHandler({
-              ...values
-            })
-          }
+          onFinish={(values: RegisAccountApiProps) => Register.mutate(values)}
         >
           <Form.Item
             name="name"
@@ -101,26 +106,22 @@ export default function Register(): JSX.Element {
             />
           </Form.Item>
           <Form.Item
-            name="phone"
+            name="email"
             rules={[
-              { required: true, message: 'Vui lòng điền số điện thoại!' },
-              { pattern: REGEX.PHONE, message: 'Số điện thoại không hợp lệ!' }
+              { required: true, message: 'Vui lòng điền email!' },
+              { type: 'email', message: 'Email không hợp lệ!' }
             ]}
           >
             <Input
-              prefix={<MobileOutlined className="site-form-item-icon" />}
-              placeholder="Số điện thoại"
+              prefix={<MailOutlined className="site-form-item-icon" />}
+              placeholder="Email"
             />
           </Form.Item>
           <Form.Item
             name="password"
             rules={[
               { required: true, message: 'Vui lòng điền mật khẩu!' },
-              { min: 6, message: 'Ít nhất 6 kí tự!' },
-              {
-                pattern: REGEX.PASSWORD,
-                message: 'Mật khẩu phải chứa ít nhất 1 chữ hoa và 1 số'
-              }
+              { min: 6, message: 'Ít nhất 6 kí tự!' }
             ]}
           >
             <Input
