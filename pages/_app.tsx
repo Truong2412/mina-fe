@@ -7,21 +7,9 @@ import '@/styles/globals.css'
 import 'react-quill/dist/quill.snow.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import 'sakura-js/dist/sakura.min.css'
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
-
-import { useEffect } from 'react'
-//@ts-ignore
-import Sakura from 'sakura-js/dist/sakura.min.js'
-
-export function SakuraEffect() {
-  useEffect(() => {
-    Sakura('body')
-  }, [])
-
-  return null
-}
+import { Sakura } from '@/components/sakuraEffect/sakura'
 
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
@@ -32,8 +20,8 @@ export default function App({ Component, pageProps }: AppProps) {
           <UserProvider>
             <Auth>
               <AppLayout>
-                <SakuraEffect />
-                <Component {...pageProps} />
+                <Sakura />
+                <Component {...pageProps}></Component>
               </AppLayout>
             </Auth>
           </UserProvider>

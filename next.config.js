@@ -19,3 +19,10 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
+
+module.exports = {
+  images: {
+    // Tắt cảnh báo khi sử dụng thẻ img bằng cách sử dụng next/image
+    disableStaticImages: true,
+  },
+}

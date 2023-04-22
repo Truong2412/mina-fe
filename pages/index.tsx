@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import { Col, Divider, Row } from 'antd'
-
 import { API, POST_TYPE } from '@/const/app-const'
 import { ClassCard } from '@/components'
 import { ClassProps } from '@/entities/class.entities'
