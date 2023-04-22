@@ -2,6 +2,10 @@
 body {
   margin: 0 !important;
 }
+/* //for slick */
+.slick-list {
+  padding-top: 1rem !important;
+}
 
 .lightSection {
   background: rgba(237, 62, 62, 0.89);
@@ -169,6 +173,3 @@ body {
 }
 
 
-.slick-list {
-  padding-top: 1rem;
-}

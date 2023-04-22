@@ -31,7 +31,7 @@ export const STORAGE_KEY = {
   SECTIONTHEME: 'sectionTheme'
 }
 
-export const API = `${process.env.NEXT_PUBLIC_SERVER_URL}/api`
+export const API = `https://minamvp.click/api`
 
 export enum METHOD {
   GET = 'get',
@@ -115,10 +115,6 @@ export const classLevelOption = [
   {
     label: CLASS_LEVEL.N5,
     value: CLASS_LEVEL.N5
-  },
-  {
-    label: CLASS_LEVEL.N5B,
-    value: CLASS_LEVEL.N5B
   }
 ]
 

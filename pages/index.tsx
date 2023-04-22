@@ -61,10 +61,6 @@ function Home({ classes, news, study }: HomeProps) {
                     </Link>
                   </Col>
                 ))}
-                <Col>óido ádio áo</Col>
-                <Col>óido ádio áo</Col>
-                <Col>óido ádio áo</Col>
-                <Col>óido ádio áo</Col>
               </Carousel>
             </Row>
           </Col>

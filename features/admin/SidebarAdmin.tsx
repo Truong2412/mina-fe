@@ -17,6 +17,7 @@ import { NotFoundPage } from '@/components/notFoundPage/NotFoundPage'
 import { Posted } from './post/Posted'
 import { NewPost } from './post/NewPost'
 import { RegisClassManager } from './regisClass/RegisClassManager'
+import { QuestionManager } from './question/QuestionManager'
 
 // import { useNavigate } from 'react-router'
 type MenuItem = Required<MenuProps>['items'][number]
@@ -59,6 +60,10 @@ export const adminNavOption = [
         component: <NewPost />
       }
     ]
+  },
+  {
+    key: 'question',
+    component: <QuestionManager />
   }
 ]
 
@@ -81,7 +86,12 @@ export const adminNav: MenuItem[] = [
   getItem('Bài viết', `post`, <ContainerOutlined />, [
     getItem('Đã đăng', `post-posted`, null),
     getItem('Đăng bài mới', `post-new`, null)
-  ])
+  ]),
+  getItem(
+    'Quản lý câu hỏi',
+    `question`,
+    <ShopOutlined style={{ fontSize: '1.5rem', color: 'blue' }} />
+  )
 ]
 
 interface SidebarAdminProps {

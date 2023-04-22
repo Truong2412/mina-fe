@@ -28,21 +28,27 @@ export const AppLayout: React.FC<Props> = ({ children }) => {
       footer?.classList.replace('lightSection', 'darkSection')
     }
   }, [theme])
-  const [messageApi, contextHolder] = message.useMessage();
-  useEffect(()=>{
-    if(isLoading){
+  const [messageApi, contextHolder] = message.useMessage()
+  useEffect(() => {
+    if (isLoading) {
       messageApi.open({
-        key:'loadingmsg',
+        key: 'loadingmsg',
         type: 'loading',
-        content: 'Vui lòng chờ ...',
+        content: 'Vui lòng chờ ...'
       })
-    }else{
+    } else {
       messageApi.destroy('loadingmsg')
     }
-  },[isLoading])
+  }, [isLoading])
 
   return (
-    <Row style={{ background: 'lightgray' }}>
+    <Row
+      style={
+        theme.section === 'lightSection'
+          ? { background: 'lightgray' }
+          : { background: 'black' }
+      }
+    >
       <Layout
         className="containerBoxShadow"
         style={{

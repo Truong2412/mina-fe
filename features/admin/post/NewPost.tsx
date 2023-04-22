@@ -39,6 +39,7 @@ export function NewPost(): JSX.Element {
     <Row justify="center">
       <Col xxl={18}>
         <Form
+          form={form}
           name="newPost"
           labelCol={{ span: 24 }}
           wrapperCol={{ span: 24 }}

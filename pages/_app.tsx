@@ -11,9 +11,18 @@ import 'slick-carousel/slick/slick-theme.css'
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Sakura } from '@/components/sakuraEffect/sakura'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { useLoading } from '@/hooks'
+import { message } from 'antd'
 
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
+  const router = useRouter()
+  // const { setIsLoading } = useLoading()
+  // useEffect(() => {
+  //   router.events.on('routeChangeStart', () => setIsLoading(true))
+  // }, [router])
   return (
     <QueryClientProvider client={queryClient}>
       <AppLoadingProvider>

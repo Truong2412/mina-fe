@@ -26,10 +26,13 @@ export default function Login(): JSX.Element {
           login(result.data.accessToken)
           router.push(`/`)
         }
+        if (result.code >= 400) {
+          message.error('Tài khoản hoặc mật khẩu không chính xác!')
+        }
       },
       onError: () => {
         setIsLoading(false)
-        message.error('Tài khoản hoặc mật khẩu không chính xác!')
+        message.error('Chức năng tạm thời bảo trì!')
       }
     }
   )
