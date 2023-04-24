@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect } from 'react'
-import { Layout, Row, message } from 'antd'
+import { Col, Layout, Row, message } from 'antd'
 import { AppFooter } from './AppFooter'
 import { useLoading, useTheme, useUser } from '../hooks'
 import { FullPageLoading } from '../components/loading/FullPageLoading'
@@ -45,31 +45,31 @@ export const AppLayout: React.FC<Props> = ({ children }) => {
     <Row
       style={
         theme.section === 'lightSection'
-          ? { background: 'lightgray' }
-          : { background: 'black' }
+          ? { background: '#f0f0f0' }
+          : { background: '#121212' }
       }
+      justify="center"
     >
-      <Layout
-        className="containerBoxShadow"
-        style={{
-          margin: '0 auto',
-          minHeight: '100vh',
-          maxWidth: 1400,
-          position: 'relative'
-        }}
-      >
-        {contextHolder}
+      <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={20}>
+        <Layout
+          className="layout"
+          style={{
+            margin: '0 auto',
+            minHeight: '100vh',
+            position: 'relative'
+          }}
+        >
+          {contextHolder}
+          <AppHeader />
+          <Content className="lightTheme" id="content-mina">
+            {children}
+          </Content>
 
-        <AppHeader />
-
-        <Content className="lightTheme" id="content-mina">
-          {children}
-        </Content>
-
-        <Footer className="lightSection" id="footer-mina">
-          <AppFooter />
-        </Footer>
-      </Layout>
+          <Footer className="lightSection" id="footer-mina">
+            <AppFooter />
+          </Footer>
+        </Layout>
+      </Col>
     </Row>
   )
 }

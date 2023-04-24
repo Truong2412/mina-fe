@@ -23,15 +23,7 @@ export function UserMenu({ userName }: UserMenuProps): JSX.Element {
 
   return (
     <Dropdown menu={{ items }} trigger={['click']} placement="bottom" arrow>
-      <div
-        style={{
-          lineHeight: '2.3rem',
-          cursor: 'pointer',
-          color: 'white'
-        }}
-      >
-        {userName}
-      </div>
+      <div className="hovername">{userName}</div>
     </Dropdown>
   )
 }

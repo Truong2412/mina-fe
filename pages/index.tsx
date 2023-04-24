@@ -30,22 +30,21 @@ function Home({ classes, news, study }: HomeProps) {
         <title>Trung tâm tiếng nhật Mina</title>
         <meta name="description" content="Trung tâm tiếng nhật Mina - Hà Nội" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="../public/favicon.svg" />
+        <link rel="icon" href="/favicon.svg" />
       </Head>
       <main>
         {/* banner and effect, regis form */}
         <div style={{ width: '100%', position: 'relative' }}>
-          {/* con me no cai anh ma` no loi~ hoai` ` */}
           <img
             src="/banner.jpeg"
             alt="mina - tieng nhat cho moi nguoi"
-            style={{ width: '100%' }}
+            width="100%"
           />
         </div>
 
         {/* news and envents and  Studiy Space */}
         <Row style={{ marginTop: '1rem' }}>
-          <div className="titleSection textTheme">Tin tức và sự kiện</div>
+          <div className="titleSection">Tin tức và sự kiện</div>
 
           <Col span={24}>
             <Row gutter={[16, 16]} justify="center">
@@ -65,28 +64,20 @@ function Home({ classes, news, study }: HomeProps) {
             </Row>
           </Col>
         </Row>
-        <Col span={24}>
-          <Row justify="center">
-            <Col>
-              <Link href={`/tin-tuc-&-su-kien`}>
-                <h3
-                  className="highlightText textTheme"
-                  style={{
-                    textAlign: 'center',
-                    cursor: 'pointer',
-                    padding: '0.5rem',
-                    borderRadius: '0.5rem'
-                  }}
-                >
-                  Xem thêm {'> >'}
-                </h3>
-              </Link>
-            </Col>
-          </Row>
-        </Col>
+        <Row justify="center">
+          <Col span={24}>
+            <Link href={`/tin-tuc-&-su-kien`}>
+              <h3
+                className="seeMore"
+              >
+                Xem thêm {'> >'}
+              </h3>
+            </Link>
+          </Col>
+        </Row>
 
         <Row style={{ marginTop: '1rem' }}>
-          <div className="titleSection textTheme">Lớp học đang tuyển sinh</div>
+          <div className="titleSection">Lớp học đang tuyển sinh</div>
 
           <Col span={24}>
             <Row gutter={[16, 16]} justify="center">
@@ -112,28 +103,20 @@ function Home({ classes, news, study }: HomeProps) {
             </Row>
           </Col>
         </Row>
-        {classes.length > 8 && (
+        {/* {classes.length > 8 && ( */}
+        <Row justify="center">
           <Col span={24}>
-            <Row justify="center">
-              <Col>
-                <h3
-                  className="highlightText textTheme"
-                  style={{
-                    textAlign: 'center',
-                    cursor: 'pointer',
-                    padding: '0.5rem',
-                    borderRadius: '0.5rem'
-                  }}
-                >
-                  Xem thêm {'> >'}
-                </h3>
-              </Col>
-            </Row>
+            <h3
+              className="seeMore"
+            >
+              Xem thêm {'> >'}
+            </h3>
           </Col>
-        )}
+        </Row>
+        {/* )} */}
 
-        <Row>
-          <div className="titleSection textTheme">Góc học tập</div>
+        <Row style={{ marginTop: '1rem' }}>
+          <div className="titleSection">Góc học tập</div>
           <Col span={24}>
             <Row gutter={[16, 16]} justify="center">
               {study.map((item, i) => (
@@ -150,25 +133,17 @@ function Home({ classes, news, study }: HomeProps) {
             </Row>
           </Col>
         </Row>
-        <Col span={24}>
-          <Row justify="center">
-            <Col>
-              <Link href={`/goc-hoc-tap`}>
-                <h3
-                  className="highlightText textTheme"
-                  style={{
-                    textAlign: 'center',
-                    cursor: 'pointer',
-                    padding: '0.5rem',
-                    borderRadius: '0.5rem'
-                  }}
-                >
-                  Xem thêm {'> >'}
-                </h3>
-              </Link>
-            </Col>
-          </Row>
-        </Col>
+        <Row justify="center">
+          <Col span={24}>
+            <Link href={`/goc-hoc-tap`}>
+              <h3
+                className="seeMore"
+              >
+                Xem thêm {'> >'}
+              </h3>
+            </Link>
+          </Col>
+        </Row>
       </main>
     </>
   )

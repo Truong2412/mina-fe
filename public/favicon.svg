@@ -13,7 +13,7 @@
       .g {
         font-family: ComicSansMS-Italic, 'Comic Sans MS';
         font-size: 109px;
-font-style: italic;
+        font-style: italic;
       }
     </style>
   </defs>

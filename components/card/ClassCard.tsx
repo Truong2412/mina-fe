@@ -82,12 +82,9 @@ export function ClassCard({
     >
       <Card
         className="hoverEffect"
-        style={{ width: '100%' }}
+        style={{ width: '100%', margin: '1rem 0' }}
         cover={
-          <div
-            className="relative imgBg"
-            style={{ backgroundImage: `url(${imageUrl})` }}
-          ></div>
+          <img className="imgCard" src={imageUrl} alt="mina" width="100%" />
         }
       >
         <div className="cardTitle">{title}</div>

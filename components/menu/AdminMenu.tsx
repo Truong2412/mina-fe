@@ -33,11 +33,7 @@ export function AdminMenu({ userName, role }: AminMenuProps): JSX.Element {
           ) : null
         }
       >
-        <span
-          style={{ lineHeight: '2.3rem', cursor: 'pointer', color: '#d3eaf2' }}
-        >
-          {userName}
-        </span>
+        <div className="hovername">{userName}</div>
       </Badge>
     </Dropdown>
   )

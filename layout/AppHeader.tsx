@@ -11,7 +11,7 @@ import { AdminMenu } from '@/components/menu/AdminMenu'
 import { UserMenu } from '@/components/menu/UserMenu'
 import Image from 'next/image'
 
-export default function AppHeader() {
+export default function AppHeader(): JSX.Element {
   const router = useRouter()
   const { user } = useUser()
   const { theme, changeTheme } = useTheme()
@@ -37,18 +37,15 @@ export default function AppHeader() {
   return (
     <Row>
       <Col style={{ background: 'white' }} span={24}>
-        <Row style={{ padding: 8 }} justify="end" align="middle">
+        <Row style={{ padding: 2 }} justify="end" align="middle">
           <Col>
             <Link
               href="https://www.facebook.com/TrungTamTiengNhatMina1/"
               target="_blank"
             >
-              <div
-                className="hoverEffect"
-                style={{ borderRadius: '0.5rem', padding: 4 }}
-              >
-                <FacebookOutlined style={{ color: '#1677ff' }} />
-                Facebook
+              <div className="facebook">
+                <FacebookOutlined className="faceicon" />
+                &nbsp;Facebook
               </div>
             </Link>
           </Col>
@@ -61,33 +58,40 @@ export default function AppHeader() {
         style={{ padding: '0 8px 0 8px' }}
       >
         <Row align="middle">
-          <Col xl={5}>
+          <Col span={6}>
             <Row
               style={{ cursor: 'pointer' }}
               onClick={() => router.push('/')}
               align="middle"
+              justify="start"
             >
               <Col>
                 <Image
                   src="/favicon.svg"
                   alt="Trung tâm tiếng nhật Mina"
-                  width={60}
-                  height={60}
+                  width={80}
+                  height={80}
+                  style={{ marginLeft: '1rem' }}
                 />
               </Col>
               <Col>
-                <p style={{ fontFamily: `'DM Sans', sans-serif` }}>
+                <p
+                  style={{
+                    fontFamily: 'Poltawski Nowy, serif',
+                    marginLeft: '-0.8rem'
+                  }}
+                >
                   TIẾNG NHẬT CHO MỌI NGƯỜI
                 </p>
               </Col>
             </Row>
           </Col>
 
-          <Col xl={14}>
+          <Col span={12}>
             <MenuTop />
           </Col>
 
-          <Col xl={5}>
+          <Col span={6}>
             <Row align="middle" gutter={[18, 0]} justify="end">
               <Col>
                 <Row gutter={[4, 0]}>

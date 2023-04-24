@@ -4,8 +4,8 @@ import styles from '../../styles/aboutMina.module.css'
 
 export default function AboutMina() {
   return (
-    <div style={{ width: '100%' }}>
-      <div style={{ color: '#5c0011', textAlign: 'center' }}>
+    <div style={{ width: '100%', padding: '1rem 0 0 0' }} className="aboutmina">
+      <div style={{ textAlign: 'center', margin: '0 0 1rem 0' }}>
         <h1>CHÀO MỪNG ĐẾN NHẬT NGỮ MINA</h1>
         <h1>TIẾNG NHẬT CHO MỌI NGƯỜI</h1>
       </div>
@@ -17,10 +17,9 @@ export default function AboutMina() {
           height="auto"
         />
       </div>
-      <div style={{ textAlign: 'center', color: '#5c0011', margin: '0 30px' }}>
-        <br />
+      <div style={{ textAlign: 'center', padding: '1rem 2rem' }}>
         <h1>VỀ MINA</h1>
-        <p style={{ textAlign: 'justify' }}>
+        <p style={{ textAlign: 'justify', marginTop: '1rem' }}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mina - chặng đường 10 năm kết nối
           tiếng Nhật - là một trong những trung tâm tiếng Nhật lâu đời nhất ở Hà
           Nội, Mina luôn tâm niệm chỉ có chất lượng mới tồn tại được. Xuất phát
@@ -36,10 +35,9 @@ export default function AboutMina() {
           sáng hơn cho mọi người.
         </p>
       </div>
-      <div style={{ color: '#5c0011', margin: '0 30px' }}>
-        <br />
+      <div style={{ padding: '1rem 2rem' }}>
         <h1 style={{ textAlign: 'center' }}>LỊCH SỬ HÌNH THÀNH</h1>
-        <p style={{ textAlign: 'justify', marginBottom: '30px' }}>
+        <p style={{ textAlign: 'justify', marginTop: '1rem' }}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tiền thân là một câu lạc Tiếng
           Nhật, Mina đã và đang phát triển dưới sự hỗ trợ không ngừng nghỉ của
           các thầy, các cô và các bạn tình nguyện viên - những người luôn muốn
@@ -58,7 +56,8 @@ export default function AboutMina() {
           .
         </p>
         <Timeline
-          style={{ marginLeft: '20px', color: '#5c0011' }}
+          className="aboutmina"
+          style={{ margin: '1rem 0 0 1rem' }}
           items={[
             {
               color: 'red',
@@ -132,7 +131,7 @@ export default function AboutMina() {
           ]}
         />
       </div>
-      <Row justify="center" style={{ color: '#5c0011', margin: '0 30px' }}>
+      <Row justify="center" style={{ padding: '1rem 2rem' }}>
         <Col>
           <Row justify="center">
             <h1>TẦM NHÌN, SỨ MỆNH VÀ GIÁ TRỊ CỐT LÕI</h1>
@@ -202,10 +201,10 @@ export default function AboutMina() {
           </Row>
         </Col>
       </Row>
-      <Row justify="center" style={{ color: '#5c0011', margin: '0 30px' }}>
+      <Row justify="center">
         <Col>
-          <Row justify="center" style={{ margin: '10px 0 20px 0' }}>
-            <h1>SẢN PHẨM - DỊCH VỤ</h1>
+          <Row justify="center">
+            <h1 style={{ margin: '1rem 0 2rem 0' }}>SẢN PHẨM - DỊCH VỤ</h1>
           </Row>
           <Row justify="center" gutter={[80, 0]}>
             <Col span={10}>
@@ -216,7 +215,9 @@ export default function AboutMina() {
                 height="auto"
                 style={{ borderRadius: '10px' }}
               />
-              <p>Lớp học luyện thi năng lực tiếng nhật từ N5 - N1</p>
+              <p style={{ margin: '0.5rem 0 1rem 0' }}>
+                Lớp học luyện thi năng lực tiếng nhật từ N5 - N1
+              </p>
             </Col>
             <Col span={10}>
               <img
@@ -226,7 +227,9 @@ export default function AboutMina() {
                 height="auto"
                 style={{ borderRadius: '10px' }}
               />
-              <p>Lớp học tiếng nhật giao tiếp với 100% giáo viên người Nhật</p>
+              <p style={{ margin: '0.5rem 0 1rem 0' }}>
+                Lớp học tiếng nhật giao tiếp với 100% giáo viên người Nhật
+              </p>
             </Col>
           </Row>
           <Row justify="center" gutter={[80, 0]}>
@@ -238,7 +241,9 @@ export default function AboutMina() {
                 height="auto"
                 style={{ borderRadius: '10px' }}
               />
-              <p>Lớp học tiếng nhật theo yêu cầu tại doanh nghiệp</p>
+              <p style={{ margin: '0.5rem 0 1rem 0' }}>
+                Lớp học tiếng nhật theo yêu cầu tại doanh nghiệp
+              </p>
             </Col>
             <Col span={10}>
               <img
@@ -248,16 +253,20 @@ export default function AboutMina() {
                 height="auto"
                 style={{ borderRadius: '10px' }}
               />
-              <p>
+              <p style={{ margin: '0.5rem 0 1rem 0' }}>
                 Tư vấn du học, giới thiệu việc làm và các hoạt động ngoại khóa
               </p>
             </Col>
           </Row>
         </Col>
       </Row>
-      <h1 style={{ textAlign: 'center', color: '#5c0011' }}>ĐỘI NGŨ NHÂN SỰ</h1>
-      <div style={{ color: '#5c0011', margin: '20px 30px' }}>
-        <h1 style={{ textAlign: 'center' }}>NGOẠI KHÓA VÀ CÂU LẠC BỘ</h1>
+      <h1 style={{ textAlign: 'center', margin: '1rem 2rem' }}>
+        ĐỘI NGŨ NHÂN SỰ
+      </h1>
+      <div style={{ padding: '1rem 2rem' }}>
+        <h1 style={{ textAlign: 'center', marginBottom: '1rem' }}>
+          NGOẠI KHÓA VÀ CÂU LẠC BỘ
+        </h1>
         <p style={{ textAlign: 'justify' }}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tại Mina, do giới hạn về thời gian
           và không gian nên việc học Tiếng Nhật trên lớp chưa bao giờ là đủ để
@@ -266,7 +275,7 @@ export default function AboutMina() {
           phần không thể thiếu trong chương trình đào tạo của Mina. Có rất nhiều
           hoạt động mà các bạn có thể tham gia nhé! Dưới đây là một trong số đó:
         </p>
-        <ul>
+        <ul style={{ marginLeft: '2rem' }}>
           <li>Trao đổi học cùng các bạn du học sinh.</li>
           <li>Dã ngoại cùng người Nhật.</li>
           <li>Chia sẻ kinh nghiệm luyện thi JLPT.</li>
@@ -284,7 +293,7 @@ export default function AboutMina() {
           </a>
           . Ngoài ra, đừng bỏ lỡ bất kỳ sự kiện sắp tới tại Mina!
         </p>
-        <Row justify="center">
+        <Row justify="center" style={{ padding: '1rem 0' }}>
           <iframe
             title="vimeo-player"
             src="https://player.vimeo.com/video/109313490?h=3b3b002041"
@@ -296,10 +305,12 @@ export default function AboutMina() {
           ></iframe>
         </Row>
       </div>
-      <Row style={{ color: '#5c0011', margin: '0 100px' }}>
+      <Row style={{ margin: '2rem 7rem' }}>
         <Col>
-          <Row justify="center" style={{ marginBottom: '20px' }}>
-            <h1>HỌC VIÊN NÓI GÌ VỀ MINA?</h1>
+          <Row justify="center">
+            <h1 style={{ margin: '1rem 0 2rem 0' }}>
+              HỌC VIÊN NÓI GÌ VỀ MINA?
+            </h1>
           </Row>
           <Row gutter={[20, 0]} style={{ marginBottom: '20px' }}>
             <Col span={4} style={{ textAlign: 'right' }}>
@@ -320,7 +331,10 @@ export default function AboutMina() {
                 }}
               >
                 <div className={styles.container}>
-                  <blockquote>
+                  <blockquote
+                    className="studentsaid"
+                    style={{ padding: '1rem' }}
+                  >
                     <em>
                       &quot;Thực ra ở đây em thật không biết dùng từ gì để diễn
                       ta sự yêu thích của em đối với Nhật vì em quá là thích,
@@ -383,7 +397,10 @@ export default function AboutMina() {
                 }}
               >
                 <div className={styles.container}>
-                  <blockquote>
+                  <blockquote
+                    className="studentsaid"
+                    style={{ padding: '1rem' }}
+                  >
                     <em>
                       &quot;Em đang rất đặt niềm tin vào Mina!?!:&#10089;. Em hy
                       vọng rằng khả năng nói tiếng Nhật của mình sẽ lưu loát hơn
@@ -413,7 +430,10 @@ export default function AboutMina() {
                 }}
               >
                 <div className={styles.container}>
-                  <blockquote>
+                  <blockquote
+                    className="studentsaid"
+                    style={{ padding: '1rem' }}
+                  >
                     <em>
                       &quot;約一ヶ月の間、本当におせわになりました。私は.インターンシップといてミナセンターに来ましたが、逆&#10088;ぎゃく&#10089;にみなさんにいろいろなことを教えてもらうことの方がおおかったと思います.&quot;
                     </em>
@@ -426,10 +446,7 @@ export default function AboutMina() {
       </Row>
       <Row justify="center">
         <Col>
-          <Row
-            justify="center"
-            style={{ color: '#5c0011', margin: '0 0 20px 0' }}
-          >
+          <Row justify="center" style={{ margin: '0 0 20px 0' }}>
             <h1>ĐỐI TÁC DOANH NGHIỆP</h1>
           </Row>
           <Row

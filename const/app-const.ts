@@ -61,7 +61,7 @@ export const ACCEPT_FILE = ['image/jpeg', 'image/jpg', 'image/png']
 export const menuitemsList = [
   {
     path: PATH.ABOUT_US,
-    label: 'Về MINA'
+    label: 'Về mina'
   },
   // {
   //   path: PATH.CLASS_REGISTRATION,
