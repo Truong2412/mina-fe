@@ -21,7 +21,7 @@ export function RelatedPostCard({
 
   return (
     <Row
-      style={{ marginTop: '1rem' }}
+      style={{ marginTop: '1rem', marginBottom: '0.5rem' }}
       className="hoverEffect roundedBox textTheme deepBoxShadow"
     >
       <div className="cardTitle">{title}</div>

@@ -42,7 +42,7 @@ export default function AppHeader(): JSX.Element {
 
   return (
     <Row>
-      <Col style={{ background: 'white' }} span={24}>
+      <Col style={{ background: 'white' }} xxl={24} xs={0}>
         <Row justify="space-between" align="middle">
           <Col>
             <Row>
@@ -101,11 +101,11 @@ export default function AppHeader(): JSX.Element {
                 <Image
                   src="/favicon.svg"
                   alt="Trung tâm tiếng nhật Mina"
-                  width={80}
-                  height={80}
+                  width={64}
+                  height={64}
                 />
               </Col>
-              <Col>
+              <Col xs={0} xxl={18}>
                 <p
                   style={{
                     fontFamily: 'Poltawski Nowy, serif',
@@ -118,35 +118,35 @@ export default function AppHeader(): JSX.Element {
             </Row>
           </Col>
 
-          <Col span={12}>
+          <Col xxl={12} xs={0}>
             <MenuTop />
           </Col>
 
-          <Col span={6}>
+          <Col xxl={6} xs={10}>
             <Row align="middle" gutter={[18, 0]} justify="end">
-              <Col>
-                <Switch
-                  checked={activeSwitch}
-                  onChange={(checked: Boolean) =>
-                    checked ? changeTheme('light') : changeTheme('dark')
-                  }
-                  checkedChildren="Sáng"
-                  unCheckedChildren="Tối"
-                />
-              </Col>
-              <Col>
-                <Row gutter={[4, 0]}>
+              <Col xxl={{ push: 0, span: 7 }} xs={{ push: 14, span: 6 }}>
+                <Row gutter={[4, 0]} justify="end">
                   {user.token && user.token !== '' ? (
                     <React.Fragment>
                       <Col>
-                        <Avatar
-                          src={
-                            user.avatar ??
-                            'https://xsgames.co/randomusers/avatar.php?g=pixel'
+                        <Badge
+                          count={
+                            user.role === ROLE.ADMIN ? (
+                              <CrownTwoTone twoToneColor={'green'} />
+                            ) : user.role === ROLE.STAFF ? (
+                              <CrownTwoTone />
+                            ) : null
                           }
-                        />
+                        >
+                          <Avatar
+                            src={
+                              user.avatar ??
+                              'https://xsgames.co/randomusers/avatar.php?g=pixel'
+                            }
+                          />
+                        </Badge>
                       </Col>
-                      <Col>
+                      <Col xs={0}>
                         {user.role === ROLE.ADMIN ||
                         user.role === ROLE.STAFF ? (
                           <AdminMenu
@@ -164,6 +164,16 @@ export default function AppHeader(): JSX.Element {
                     </Button>
                   )}
                 </Row>
+              </Col>
+              <Col xxl={6} xs={0}>
+                <Switch
+                  checked={activeSwitch}
+                  onChange={(checked: Boolean) =>
+                    checked ? changeTheme('light') : changeTheme('dark')
+                  }
+                  checkedChildren="Sáng"
+                  unCheckedChildren="Tối"
+                />
               </Col>
             </Row>
           </Col>

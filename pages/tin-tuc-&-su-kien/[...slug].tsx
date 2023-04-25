@@ -27,31 +27,37 @@ export default function ClassDetail({ data, relatedPost }: PostDetailProps) {
       <Col xxl={16}>
         <BreadCrumb list={breads} />
 
-        <Row gutter={[16, 16]} style={{ padding: '1rem' }}>
-          <Col xxl={16} className="textTheme boxShadow roundedBox">
-            <Row style={{ padding: '0.5rem' }}>
+        <Row gutter={[16, 16]}>
+          <Col xxl={16}>
+            <Row
+              className="textTheme boxShadow roundedBox"
+              style={{ padding: '0.5rem' }}
+            >
               <h3>{data.title}</h3>
-              <div
+              <Col
+                span={24}
                 style={{ width: '100%' }}
                 className="roundedBox textTheme richTextBox"
                 dangerouslySetInnerHTML={{ __html: data.content }}
               />
             </Row>
           </Col>
-          <Col xxl={8} className="boxShadow roundedBox">
-            <Divider className="textTheme">Bài viết liên quan</Divider>
-            {relatedPost.map((item, i) => (
-              <Link
-                key={`related post ${i}`}
-                href={`tin-tuc-&-su-kien/${item.title}&pid${item._id}`}
-              >
-                <RelatedPostCard
-                  author={item.author}
-                  title={item.title}
-                  createdAt={item.createdAt ?? ''}
-                />
-              </Link>
-            ))}
+          <Col xxl={8}>
+            <Row className="boxShadow roundedBox">
+              <Divider className="textTheme">Bài viết liên quan</Divider>
+              {relatedPost.map((item, i) => (
+                <Link
+                  key={`related post ${i}`}
+                  href={`tin-tuc-&-su-kien/${item.title}&pid${item._id}`}
+                >
+                  <RelatedPostCard
+                    author={item.author}
+                    title={item.title}
+                    createdAt={item.createdAt ?? ''}
+                  />
+                </Link>
+              ))}
+            </Row>
           </Col>
         </Row>
       </Col>

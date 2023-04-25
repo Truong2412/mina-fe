@@ -1,5 +1,5 @@
 import { NotFoundPage } from '@/components/notFoundPage/NotFoundPage'
-import { API } from '@/const/app-const'
+import { API, PATH } from '@/const/app-const'
 import { REGEX } from '@/const/regexp'
 import { ClassProps } from '@/entities/class.entities'
 import { useLoading, useUser } from '@/hooks'
@@ -24,6 +24,8 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { CreateRegisClassApi } from '../api/regis-clas.api'
 import { GetClassByIdApi } from '../api/class.api'
+import { BreadCrumb } from '@/components'
+import { CrumbProps } from '@/components/breadCrumb/BreadCrumb'
 
 interface ClassDetailProps {
   classData: ClassProps
@@ -77,106 +79,137 @@ export default function ClassDetail({ classData }: ClassDetailProps) {
     )
   }
 
+  const breads: CrumbProps[] = [
+    {
+      label: 'Lớp học'
+    },
+    {
+      label: `Tuyển sinh lớp học ${
+        classData.classLevel
+      }, Khai giảng ${formatDate(classData.startDate)}`
+    }
+  ]
   return (
     <React.Fragment>
       {!classData._id ? (
         <NotFoundPage />
       ) : (
-        <Row style={{ padding: '1rem' }} gutter={[16, 16]}>
-          <Col span={24}>BREAD CRUMB</Col>
+        <Row justify="center">
           <Col xxl={16}>
-            <Row gutter={[16, 0]}>
-              <Col xxl={6}></Col>
-              <Col className="roundedBox" xxl={12}>
-                <Row align="middle">
-                  <Col xxl={4}>
-                    <h3 className="textTheme"> Cấp độ</h3>
+            <BreadCrumb list={breads} />
+            <Row style={{ padding: '1rem' }} gutter={[16, 16]}>
+              <Col xxl={16} className="roundedBox boxShadow textTheme">
+                <Row style={{ marginTop: '0.5rem' }} gutter={[8, 8]}>
+                  <Col xxl={6} xs={24}>
+                    <h4 style={{ padding: '0.5rem' }} className="textTheme">
+                      Cấp độ
+                    </h4>
                   </Col>
-                  <Col xxl={19}>
-                    <h3 className="textBox">{classData.classLevel}</h3>
+                  <Col xxl={17} xs={23}>
+                    <h4 className="textBox">{classData.classLevel}</h4>
                   </Col>
                 </Row>
 
-                <Row align="middle">
-                  <Col xxl={4}>
-                    <h3 className="textTheme">Ngày học</h3>
+                <Row style={{ marginTop: '0.5rem' }} gutter={[8, 8]}>
+                  <Col xxl={6} xs={24}>
+                    <h4 style={{ padding: '0.5rem' }} className="textTheme">
+                      Ngày học
+                    </h4>
                   </Col>
-                  <Col xxl={19}>
-                    <h3 className="textBox">
+                  <Col xxl={17} xs={23}>
+                    <h4 className="textBox">
                       {formatTime(classData.time[0])}
                       {' - '}
                       {formatTime(classData.time[1])}{' '}
                       {classData.daysOfWeek.toString()}
-                    </h3>
+                    </h4>
                   </Col>
                 </Row>
 
-                <Row align="middle">
-                  <Col xxl={4}>
-                    <h3 className="textTheme">Ngày dự kiến khai giảng</h3>
+                <Row style={{ marginTop: '0.5rem' }} gutter={[8, 8]}>
+                  <Col xxl={6} xs={24}>
+                    <h4 style={{ padding: '0.5rem' }} className="textTheme">
+                      Ngày dự kiến khai giảng
+                    </h4>
                   </Col>
-                  <Col xxl={19}>
-                    <h3 className="textBox">
+                  <Col xxl={17} xs={23}>
+                    <h4 className="textBox">
                       {formatDate(classData.startDate)}
-                    </h3>
+                    </h4>
                   </Col>
                 </Row>
-                <Button onClick={() => setOpenModal(true)} block type="primary">
-                  Đăng ký
-                </Button>
+                <Row justify="center" style={{ margin: '0.5rem 0 0.5rem 0' }}>
+                  <Col span={23}>
+                    <Button
+                      style={{ margin: '0.5rem 0 0.5rem 0' }}
+                      onClick={() => setOpenModal(true)}
+                      block
+                      type="primary"
+                    >
+                      Đăng ký
+                    </Button>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Divider className="textTheme" orientation="left">
+                    Thông tin thêm
+                  </Divider>
+                  <div
+                    style={{ width: '100%' }}
+                    className="roundedBox textTheme richTextBox"
+                    dangerouslySetInnerHTML={{ __html: classData.description }}
+                  />
+                </Row>
+              </Col>
+
+              <Col xxl={8}>
+                <div className="roundedBox boxShadow textTheme">
+                  <h4>
+                    Chào mừng các bạn đến với khoá học tại nhật ngữ Mina! Chúng
+                    tôi tự hào là một trong những trung tâm dạy ngoại ngữ hàng
+                    đầu tại địa phương, và chúng tôi cam kết cung cấp cho các
+                    bạn một trải nghiệm học tập tiếng Nhật đầy thú vị và hiệu
+                    quả.
+                  </h4>
+                  <p>
+                    Tại trung tâm chúng tôi, các bạn sẽ được học từ những giáo
+                    viên có trình độ chuyên môn cao, giàu kinh nghiệm và nhiệt
+                    tình. Chúng tôi sử dụng các phương pháp giảng dạy hiện đại,
+                    kết hợp giữa lý thuyết và thực hành, giúp các bạn phát triển
+                    kỹ năng ngôn ngữ một cách toàn diện.
+                  </p>
+                  <p>
+                    Khi đăng ký khoá học tại trung tâm chúng tôi, các bạn sẽ
+                    được hưởng một số quyền lợi đặc biệt, bao gồm:
+                  </p>
+                  <ul style={{ paddingLeft: '1rem' }}>
+                    <li>Học phí hợp lý và đảm bảo chất lượng giáo dục</li>
+                    <li>Hỗ trợ tư vấn học tập </li>
+                    <li>
+                      Học viên có thể tự tin về kiến thức của mình sau khi hoàn
+                      thành khoá học
+                    </li>
+                    <li>
+                      Các hoạt động ngoại khóa và buổi giao lưu để giúp các bạn
+                      rèn luyện kỹ năng giao tiếp tiếng Nhật một cách tự tin và
+                      hiệu quả.
+                    </li>
+                  </ul>
+                  <p>
+                    Chúng tôi hy vọng rằng sau khi học tại trung tâm của chúng
+                    tôi, các bạn sẽ có thể sử dụng tiếng Nhật một cách thông
+                    thạo và tự tin trong các tình huống học tập, làm việc và
+                    giao tiếp hàng ngày. Chúng tôi mong đợi được đón tiếp các
+                    bạn học viên {'<3 !'}
+                  </p>
+                </div>
               </Col>
             </Row>
-            <Row>
-              <Divider className="textTheme" orientation="left">
-                Thông tin thêm
-              </Divider>
-              <div
-                style={{ width: '100%' }}
-                className="roundedBox textTheme richTextBox"
-                dangerouslySetInnerHTML={{ __html: classData.description }}
-              />
-            </Row>
-          </Col>
-
-          <Col className="textTheme roundedBox" xxl={8}>
-            <h4>
-              Chào mừng các bạn đến với khoá học tại nhật ngữ Mina! Chúng tôi tự
-              hào là một trong những trung tâm dạy ngoại ngữ hàng đầu tại địa
-              phương, và chúng tôi cam kết cung cấp cho các bạn một trải nghiệm
-              học tập tiếng Nhật đầy thú vị và hiệu quả.
-            </h4>
-            <p>
-              Tại trung tâm chúng tôi, các bạn sẽ được học từ những giáo viên có
-              trình độ chuyên môn cao, giàu kinh nghiệm và nhiệt tình. Chúng tôi
-              sử dụng các phương pháp giảng dạy hiện đại, kết hợp giữa lý thuyết
-              và thực hành, giúp các bạn phát triển kỹ năng ngôn ngữ một cách
-              toàn diện.
-            </p>
-            <p>
-              Khi đăng ký khoá học tại trung tâm chúng tôi, các bạn sẽ được
-              hưởng một số quyền lợi đặc biệt, bao gồm:
-            </p>
-            <ul>
-              <li>Học phí hợp lý và đảm bảo chất lượng giáo dục</li>
-              <li>Hỗ trợ tư vấn học tập </li>
-              <li>
-                Học viên có thể tự tin về kiến thức của mình sau khi hoàn thành
-                khoá học
-              </li>
-              <li>
-                Các hoạt động ngoại khóa và buổi giao lưu để giúp các bạn rèn
-                luyện kỹ năng giao tiếp tiếng Nhật một cách tự tin và hiệu quả.
-              </li>
-            </ul>
-            <p>
-              Chúng tôi hy vọng rằng sau khi học tại trung tâm của chúng tôi,
-              các bạn sẽ có thể sử dụng tiếng Nhật một cách thông thạo và tự tin
-              trong các tình huống học tập, làm việc và giao tiếp hàng ngày.
-              Chúng tôi mong đợi được đón tiếp các bạn học viên {'<3 !'}
-            </p>
           </Col>
         </Row>
       )}
+
       <Modal
         open={openModal}
         onCancel={() => setOpenModal(false)}

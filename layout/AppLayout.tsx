@@ -1,9 +1,10 @@
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { Col, Layout, Row, message } from 'antd'
 import { AppFooter } from './AppFooter'
 import { useLoading, useTheme, useUser } from '../hooks'
 import { FullPageLoading } from '../components/loading/FullPageLoading'
 import AppHeader from './AppHeader'
+import { MobileMenu } from '@/components/menu/MobileMenu'
 
 type Props = {
   children: ReactNode
@@ -44,12 +45,14 @@ export const AppLayout: React.FC<Props> = ({ children }) => {
     }
   }, [isLoading])
 
+  const [width, setWidth] = useState(0)
+
+  useEffect(() => {
+    setWidth(window.innerWidth)
+  }, [])
+
   return (
-    <Row
-      id='bg-mina'
-      className='lightbg'
-      justify="center"
-    >
+    <Row id="bg-mina" className="lightbg" justify="center">
       <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={20}>
         <Layout
           className="layout"
@@ -59,7 +62,9 @@ export const AppLayout: React.FC<Props> = ({ children }) => {
             position: 'relative'
           }}
         >
+          {width < 576 && <MobileMenu />}
           {contextHolder}
+
           <AppHeader />
           <Content className="lightTheme" id="content-mina">
             {children}

@@ -1,7 +1,6 @@
 import { PATH, ROLE } from '@/const/app-const'
 import { useUser } from '@/hooks'
-import { CrownTwoTone } from '@ant-design/icons'
-import { Badge, Dropdown, MenuProps } from 'antd'
+import { Dropdown, MenuProps } from 'antd'
 import Link from 'next/link'
 
 interface AminMenuProps {
@@ -24,17 +23,7 @@ export function AdminMenu({ userName, role }: AminMenuProps): JSX.Element {
 
   return (
     <Dropdown menu={{ items }} trigger={['click']} placement="bottom" arrow>
-      <Badge
-        count={
-          role === ROLE.ADMIN ? (
-            <CrownTwoTone twoToneColor={'green'} />
-          ) : role === ROLE.STAFF ? (
-            <CrownTwoTone />
-          ) : null
-        }
-      >
-        <div className="hovername">{userName}</div>
-      </Badge>
+      <div className="hovername">{userName}</div>
     </Dropdown>
   )
 }
