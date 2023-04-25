@@ -357,8 +357,8 @@ export default function AboutMina() {
                       sensei, dù lúc đó thì em đã chuyển nhà ra khá xa và di
                       chuyển tới lớp học hơi vất vả bởi Mina có phương pháp dạy
                       cấp tốc, cơ sở vật chất tốt hợp với cách học của em
-                      &#10088;em chỉ ôn N3 có 1 tháng rưỡi trước khi thi, N2 thì
-                      là 4 tháng&#10089;.
+                      &#40;em chỉ ôn N3 có 1 tháng rưỡi trước khi thi, N2 thì
+                      là 4 tháng&#41;.
                     </em>
                     <br />
                     <em>
@@ -402,7 +402,7 @@ export default function AboutMina() {
                     style={{ padding: '1rem' }}
                   >
                     <em>
-                      &quot;Em đang rất đặt niềm tin vào Mina!?!:&#10089;. Em hy
+                      &quot;Em đang rất đặt niềm tin vào Mina!?!:&#41;. Em hy
                       vọng rằng khả năng nói tiếng Nhật của mình sẽ lưu loát hơn
                       khi vào Mina :3&quot;
                     </em>
@@ -435,7 +435,7 @@ export default function AboutMina() {
                     style={{ padding: '1rem' }}
                   >
                     <em>
-                      &quot;約一ヶ月の間、本当におせわになりました。私は.インターンシップといてミナセンターに来ましたが、逆&#10088;ぎゃく&#10089;にみなさんにいろいろなことを教えてもらうことの方がおおかったと思います.&quot;
+                      &quot;約一ヶ月の間、本当におせわになりました。私は.インターンシップといてミナセンターに来ましたが、逆&#40;ぎゃく&#41;にみなさんにいろいろなことを教えてもらうことの方がおおかったと思います.&quot;
                     </em>
                   </blockquote>
                 </div>

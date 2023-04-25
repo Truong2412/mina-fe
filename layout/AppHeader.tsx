@@ -48,9 +48,9 @@ export default function AppHeader(): JSX.Element {
             <Row>
               <Col style={{ padding: '0.6rem', color: 'red' }}>
                 <EnvironmentOutlined />
-                &nbsp;số 19-Ngõ 33 - Chùa Láng - Hà Nội
+                &nbsp;Số 19 - Ngõ 33 - Chùa Láng - Hà Nội
               </Col>
-              <Col style={{ padding: '0.6rem 0', color: 'red' }}>
+              <Col style={{ padding: '0.6rem', color: 'red' }}>
                 <PhoneOutlined rotate={90} />
                 &nbsp;+24 3775 7264
               </Col>
