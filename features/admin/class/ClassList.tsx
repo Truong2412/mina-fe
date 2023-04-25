@@ -154,18 +154,19 @@ export function ClassList() {
               <Row justify="center">
                 <Pagination
                   className="roundedBox"
-                  pageSize={filter.pageSize}
+                  pageSize={6}
                   showQuickJumper={total > 100}
                   defaultCurrent={1}
                   total={total}
                   onChange={(page) => handleFilterChange('page', page)}
+                  defaultPageSize={6}
                 />
               </Row>
             </Col>
           </Row>
         )}
       </Col>
-      <Col className="roundedBox" xxl={8}>
+      <Col className="roundedBox boxclass" xxl={8}>
         <ClassInfo {...detail} />
       </Col>
     </Row>

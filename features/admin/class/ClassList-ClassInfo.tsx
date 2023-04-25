@@ -37,16 +37,7 @@ function Info(detail: ClassProps) {
           </p>
         ) : (
           <Col span={24}>
-            <Space align="center" direction="horizontal">
-              <Button type="primary">Lưu thay đổi</Button>
-
-              {detail.status === CLASS_STATUS.OPEN && (
-                <Button type="dashed" danger>
-                  Xoá
-                </Button>
-              )}
-            </Space>
-            <ul>
+            <ul style={{ margin: '0 0 4rem 1.4rem' }}>
               <li className="textTheme">Level: {detail.classLevel ?? ''}</li>
               <li className="textTheme">Người tạo: {detail.creatorId ?? ''}</li>
               <li className="textTheme">
@@ -62,11 +53,23 @@ function Info(detail: ClassProps) {
                   placeholder="Giáo viên"
                   id="teacherId"
                   options={[]}
-                  style={{ width: '100%' }}
+                  style={{ width: '100%', marginTop: '0.4rem' }}
                   defaultValue={detail.teacher}
                 />
               </li>
             </ul>
+            <Row justify="center" align="middle" gutter={[30, 0]}>
+              <Col>
+                <Button type="primary">Lưu thay đổi</Button>
+              </Col>
+              <Col>
+                {detail.status === CLASS_STATUS.OPEN && (
+                  <Button type="dashed" danger>
+                    Xoá
+                  </Button>
+                )}
+              </Col>
+            </Row>
           </Col>
         )}
       </Row>

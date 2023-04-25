@@ -5,16 +5,19 @@ import { useStorage } from '../hooks'
 interface ThemeProps {
   content: 'lightTheme' | 'darkTheme'
   section: 'lightSection' | 'darkSection'
+  bgfull: 'lightbg' | 'darkbg'
 }
 
 export const lightTheme: ThemeProps = {
   content: 'lightTheme',
-  section: 'lightSection'
+  section: 'lightSection',
+  bgfull: 'lightbg'
 }
 
 export const darkTheme: ThemeProps = {
   content: 'darkTheme',
-  section: 'darkSection'
+  section: 'darkSection',
+  bgfull: 'darkbg'
 }
 export interface themeContextType {
   theme: ThemeProps

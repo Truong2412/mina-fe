@@ -1,19 +1,12 @@
-import { Col, Menu, MenuProps, Row, Switch } from 'antd'
-import React, { ReactElement, useEffect, useState } from 'react'
+import { Menu, MenuProps } from 'antd'
+import React, { ReactElement, useState } from 'react'
 import {
-  // MailOutlined,
-  // AppstoreOutlined,
-  // SettingOutlined,
   ShopOutlined,
-  UnorderedListOutlined,
   ContainerOutlined,
-  GiftOutlined,
-  DollarTwoTone
+  FormOutlined,
+  QuestionOutlined
 } from '@ant-design/icons'
-import { useTheme } from '../../hooks'
-import { PATH } from '../../const/app-const'
 import { ClassManager } from './class/ClassManager'
-import { NotFoundPage } from '@/components/notFoundPage/NotFoundPage'
 import { Posted } from './post/Posted'
 import { NewPost } from './post/NewPost'
 import { RegisClassManager } from './regisClass/RegisClassManager'
@@ -69,28 +62,37 @@ export const adminNavOption = [
 
 export const adminNav: MenuItem[] = [
   getItem(
-    'Lớp học',
-    `class`,
-    <ShopOutlined style={{ fontSize: '1.5rem', color: 'blue' }} />
+    <div className="menuItem">
+      <ShopOutlined style={{ fontSize: '1.5rem' }} />
+      &nbsp;&nbsp;Lớp học
+    </div>,
+    `class`
   ),
   getItem(
-    'Đơn đăng ký học',
-    `regis-class`,
-    <ShopOutlined style={{ fontSize: '1.5rem', color: 'blue' }} />
+    <div className="menuItem">
+      <FormOutlined style={{ fontSize: '1.5rem' }} />
+      &nbsp;&nbsp;Đơn đăng ký học
+    </div>,
+    `regis-class`
   ),
-  // getItem(
-  //   'Học viên',
-  //   `student`,
-  //   <ShopOutlined style={{ fontSize: '1.5rem', color: 'blue' }} />
-  // ),
-  getItem('Bài viết', `post`, <ContainerOutlined />, [
-    getItem('Đã đăng', `post-posted`, null),
-    getItem('Đăng bài mới', `post-new`, null)
-  ]),
   getItem(
-    'Quản lý câu hỏi',
-    `question`,
-    <ShopOutlined style={{ fontSize: '1.5rem', color: 'blue' }} />
+    <div className="menuItem">
+      <ContainerOutlined style={{ fontSize: '1.5rem' }} />
+      &nbsp;&nbsp;Bài viết
+    </div>,
+    `post`,
+    null,
+    [
+      getItem(<div className="menuItem">Đã đăng</div>, `post-posted`),
+      getItem(<div className="menuItem">Đăng bài mới</div>, `post-new`)
+    ]
+  ),
+  getItem(
+    <div className="menuItem">
+      <QuestionOutlined style={{ fontSize: '1.5rem' }} />
+      &nbsp;&nbsp;Quản lý câu hỏi
+    </div>,
+    `question`
   )
 ]
 
@@ -129,9 +131,13 @@ export function SidebarAdmin({
 
   return (
     <Menu
+      className="textTheme"
       onClick={onClick}
-      style={{ width: '100%', height: '100%' }}
-      // defaultOpenKeys={['sub1', 'sub2', 'sub4']}
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'transparent'
+      }}
       selectedKeys={[current]}
       mode="inline"
       items={adminNav}

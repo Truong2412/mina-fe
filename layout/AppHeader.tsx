@@ -5,7 +5,13 @@ import MenuTop from '@/components/menu/MenuTop'
 import { useTheme, useUser } from '@/hooks'
 import { Router, useRouter } from 'next/router'
 import { PATH, ROLE } from '@/const/app-const'
-import { CrownTwoTone, FacebookOutlined } from '@ant-design/icons'
+import {
+  CrownTwoTone,
+  EnvironmentOutlined,
+  FacebookOutlined,
+  PhoneOutlined,
+  YoutubeOutlined
+} from '@ant-design/icons'
 import Link from 'next/link'
 import { AdminMenu } from '@/components/menu/AdminMenu'
 import { UserMenu } from '@/components/menu/UserMenu'
@@ -37,17 +43,44 @@ export default function AppHeader(): JSX.Element {
   return (
     <Row>
       <Col style={{ background: 'white' }} span={24}>
-        <Row style={{ padding: 2 }} justify="end" align="middle">
+        <Row justify="space-between" align="middle">
           <Col>
-            <Link
-              href="https://www.facebook.com/TrungTamTiengNhatMina1/"
-              target="_blank"
-            >
-              <div className="facebook">
-                <FacebookOutlined className="faceicon" />
-                &nbsp;Facebook
-              </div>
-            </Link>
+            <Row>
+              <Col style={{ padding: '0.6rem', color: 'red' }}>
+                <EnvironmentOutlined />
+                &nbsp;adghklmn
+              </Col>
+              <Col style={{ padding: '0.6rem 0', color: 'red' }}>
+                <PhoneOutlined rotate={90} />
+                &nbsp;751893751
+              </Col>
+            </Row>
+          </Col>
+          <Col>
+            <Row>
+              <Col>
+                <Link
+                  href="https://www.youtube.com/channel/UCEypAcOaTK_tpwvzhLBUpaA"
+                  target="_blank"
+                >
+                  <div className="youtube">
+                    <YoutubeOutlined className="yticon" />
+                    &nbsp;Youtube
+                  </div>
+                </Link>
+              </Col>
+              <Col>
+                <Link
+                  href="https://www.facebook.com/TrungTamTiengNhatMina1/"
+                  target="_blank"
+                >
+                  <div className="facebook">
+                    <FacebookOutlined className="faceicon" />
+                    &nbsp;Facebook
+                  </div>
+                </Link>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Col>
@@ -55,7 +88,7 @@ export default function AppHeader(): JSX.Element {
         id="header"
         className="lightSection"
         span={24}
-        style={{ padding: '0 8px 0 8px' }}
+        style={{ padding: '0 1rem' }}
       >
         <Row align="middle">
           <Col span={6}>
@@ -63,7 +96,6 @@ export default function AppHeader(): JSX.Element {
               style={{ cursor: 'pointer' }}
               onClick={() => router.push('/')}
               align="middle"
-              justify="start"
             >
               <Col>
                 <Image
@@ -71,14 +103,13 @@ export default function AppHeader(): JSX.Element {
                   alt="Trung tâm tiếng nhật Mina"
                   width={80}
                   height={80}
-                  style={{ marginLeft: '1rem' }}
                 />
               </Col>
               <Col>
                 <p
                   style={{
                     fontFamily: 'Poltawski Nowy, serif',
-                    marginLeft: '-0.8rem'
+                    marginLeft: '-0.6rem'
                   }}
                 >
                   TIẾNG NHẬT CHO MỌI NGƯỜI
@@ -93,6 +124,16 @@ export default function AppHeader(): JSX.Element {
 
           <Col span={6}>
             <Row align="middle" gutter={[18, 0]} justify="end">
+              <Col>
+                <Switch
+                  checked={activeSwitch}
+                  onChange={(checked: Boolean) =>
+                    checked ? changeTheme('light') : changeTheme('dark')
+                  }
+                  checkedChildren="Sáng"
+                  unCheckedChildren="Tối"
+                />
+              </Col>
               <Col>
                 <Row gutter={[4, 0]}>
                   {user.token && user.token !== '' ? (
@@ -123,17 +164,6 @@ export default function AppHeader(): JSX.Element {
                     </Button>
                   )}
                 </Row>
-              </Col>
-
-              <Col>
-                <Switch
-                  checked={activeSwitch}
-                  onChange={(checked: Boolean) =>
-                    checked ? changeTheme('light') : changeTheme('dark')
-                  }
-                  checkedChildren="Sáng"
-                  unCheckedChildren="Tối"
-                />
               </Col>
             </Row>
           </Col>

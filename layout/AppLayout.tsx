@@ -20,12 +20,15 @@ export const AppLayout: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     const content = document.getElementById('content-mina')
     const footer = document.getElementById('footer-mina')
+    const bg = document.getElementById('bg-mina')
     if (theme.section === 'lightSection') {
       content?.classList.replace('darkTheme', 'lightTheme')
       footer?.classList.replace('darkSection', 'lightSection')
+      bg?.classList.replace('darkbg', 'lightbg')
     } else {
       content?.classList.replace('lightTheme', 'darkTheme')
       footer?.classList.replace('lightSection', 'darkSection')
+      bg?.classList.replace('lightbg', 'darkbg')
     }
   }, [theme])
   const [messageApi, contextHolder] = message.useMessage()
@@ -43,11 +46,8 @@ export const AppLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <Row
-      style={
-        theme.section === 'lightSection'
-          ? { background: '#f0f0f0' }
-          : { background: '#121212' }
-      }
+      id='bg-mina'
+      className='lightbg'
       justify="center"
     >
       <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={20}>
