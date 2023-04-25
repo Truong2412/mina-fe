@@ -22,7 +22,8 @@ export const PATH = {
   MANAGE: 'quan-tri',
   STUDENT: 'hoc-vien',
   USER: 'user',
-  ADMIN: 'admin'
+  ADMIN: 'admin',
+  NEWS_AND_EVENTS: 'tin-tuc-&-su-kien'
 }
 
 export const STORAGE_KEY = {

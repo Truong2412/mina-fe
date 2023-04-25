@@ -48,7 +48,7 @@ export function NewPost(): JSX.Element {
           autoComplete="off"
         >
           <Form.Item
-            label="Tiêu đề bài đăng"
+            label={<label className="textTheme">Tiêu đề bài đăng</label>}
             name="title"
             rules={[
               {
@@ -63,7 +63,7 @@ export function NewPost(): JSX.Element {
 
           <Form.Item
             name="type"
-            label="Phân loại bài đăng"
+            label={<label className="textTheme">Phân loại bài đăng</label>}
             rules={[
               {
                 required: true,
@@ -82,7 +82,9 @@ export function NewPost(): JSX.Element {
           </Form.Item>
           <Form.Item
             name="cardImg"
-            label="Ảnh đại diện cho bài đăng"
+            label={
+              <label className="textTheme">Ảnh đại diện cho bài đăng</label>
+            }
             rules={[
               {
                 required: true,
@@ -99,7 +101,7 @@ export function NewPost(): JSX.Element {
           </Form.Item>
           <Form.Item
             name="content"
-            label="Nội dung"
+            label={<label className="textTheme">Nội dung</label>}
             rules={[
               {
                 required: true,

@@ -24,6 +24,7 @@ interface HomeProps {
   study: PostProps[]
 }
 function Home({ classes, news, study }: HomeProps) {
+  console.log(classes)
   return (
     <>
       <Head>
@@ -67,11 +68,7 @@ function Home({ classes, news, study }: HomeProps) {
         <Row justify="center">
           <Col span={24}>
             <Link href={`/tin-tuc-&-su-kien`}>
-              <h3
-                className="seeMore"
-              >
-                Xem thêm {'> >'}
-              </h3>
+              <h3 className="seeMore">Xem thêm {'> >'}</h3>
             </Link>
           </Col>
         </Row>
@@ -87,6 +84,7 @@ function Home({ classes, news, study }: HomeProps) {
                     <Link href={`/${PATH.CLASS}/${item._id}`}>
                       <ClassCard
                         type="student"
+                        cardImg={item.cardImg}
                         daysOfWeek={item.daysOfWeek}
                         createdAt={item.createdAt}
                         classLevel={item.classLevel}
@@ -106,11 +104,7 @@ function Home({ classes, news, study }: HomeProps) {
         {/* {classes.length > 8 && ( */}
         <Row justify="center">
           <Col span={24}>
-            <h3
-              className="seeMore"
-            >
-              Xem thêm {'> >'}
-            </h3>
+            <h3 className="seeMore">Xem thêm {'> >'}</h3>
           </Col>
         </Row>
         {/* )} */}
@@ -136,11 +130,7 @@ function Home({ classes, news, study }: HomeProps) {
         <Row justify="center">
           <Col span={24}>
             <Link href={`/goc-hoc-tap`}>
-              <h3
-                className="seeMore"
-              >
-                Xem thêm {'> >'}
-              </h3>
+              <h3 className="seeMore">Xem thêm {'> >'}</h3>
             </Link>
           </Col>
         </Row>
@@ -169,10 +159,13 @@ export async function getServerSideProps() {
       }
     }
   } catch (error) {
+    console.log(error)
     return {
-      classes: [],
-      study: [],
-      news: []
+      props: {
+        classes: [],
+        study: [],
+        news: []
+      }
     }
   }
 }

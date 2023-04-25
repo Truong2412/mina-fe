@@ -1,49 +1,60 @@
-import { NotFoundPage } from '@/components/notFoundPage/NotFoundPage'
-import { API } from '@/const/app-const'
-import { REGEX } from '@/const/regexp'
-import { ClassProps } from '@/entities/class.entities'
-import { useLoading, useUser } from '@/hooks'
-import { ResponseProps, checkRes } from '@/network/services/api-handler'
-import { formatDate, formatTime } from '@/ultis/dataConvert'
-import {
-  Button,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Modal,
-  Radio,
-  Row,
-  Select,
-  Space,
-  message
-} from 'antd'
-import { GetServerSideProps } from 'next'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
-import { CreateRegisClassApi } from '../api/regis-clas.api'
-import { GetPostByIdApi } from '../api/post.api'
+import { PATH, POST_TYPE } from '@/const/app-const'
+
+import { Col, Divider, Row } from 'antd'
+import React from 'react'
+import { GetPostByIdApi, GetRelatedPostApi } from '../api/post.api'
 import { PostProps } from '@/entities/post.entities'
+import { BreadCrumb, RelatedPostCard } from '@/components'
+import Link from 'next/link'
+import { CrumbProps } from '@/components/breadCrumb/BreadCrumb'
 
 interface PostDetailProps {
   data: PostProps
+  relatedPost: PostProps[]
 }
-
-export default function ClassDetail({ data }: PostDetailProps) {
+export default function ClassDetail({ data, relatedPost }: PostDetailProps) {
+  const breads: CrumbProps[] = [
+    {
+      label: 'Tin tức & Sự kiện',
+      link: `/${PATH.NEWS_AND_EVENTS}`
+    },
+    {
+      label: data.title
+    }
+  ]
   return (
-    <Row className="roundedBox textTheme">
+    <Row justify="center">
       <Col xxl={16}>
-        <Row>
-          <h3>{data.title}</h3>
-          <div
-            style={{ width: '100%' }}
-            className="roundedBox textTheme richTextBox"
-            dangerouslySetInnerHTML={{ __html: data.content }}
-          />
+        <BreadCrumb list={breads} />
+
+        <Row gutter={[16, 16]} style={{ padding: '1rem' }}>
+          <Col xxl={16} className="textTheme boxShadow roundedBox">
+            <Row style={{ padding: '0.5rem' }}>
+              <h3>{data.title}</h3>
+              <div
+                style={{ width: '100%' }}
+                className="roundedBox textTheme richTextBox"
+                dangerouslySetInnerHTML={{ __html: data.content }}
+              />
+            </Row>
+          </Col>
+          <Col xxl={8} className="boxShadow roundedBox">
+            <Divider className="textTheme">Bài viết liên quan</Divider>
+            {relatedPost.map((item, i) => (
+              <Link
+                key={`related post ${i}`}
+                href={`tin-tuc-&-su-kien/${item.title}&pid${item._id}`}
+              >
+                <RelatedPostCard
+                  author={item.author}
+                  title={item.title}
+                  createdAt={item.createdAt ?? ''}
+                />
+              </Link>
+            ))}
+          </Col>
         </Row>
       </Col>
-      <Col xxl={8}>Các bài liên quan</Col>
     </Row>
   )
 }
@@ -53,27 +64,20 @@ export async function getServerSideProps(context: any) {
     const id = context.params.slug[0].split('&pid')[1] as string
 
     const result = await GetPostByIdApi(id ?? '')
-    if (result.data !== null) {
-      return {
-        props: {
-          data: result.data
-        }
-      }
-    } else {
-      return {
-        props: {
-          data: {}
-        }
+
+    const relatedPost = await GetRelatedPostApi(id, POST_TYPE.NEWS)
+
+    return {
+      props: {
+        data: result.data ?? {},
+        relatedPost: relatedPost.data ?? []
       }
     }
-    // const { classId } = context.params
-    // const result = await fetch(`${API}/class/${classId}`)
-    // const resultData: ResponseProps<ClassProps> = await result.json()
-    // const classData = resultData.data ?? ({} as ClassProps)
   } catch (error) {
     return {
       props: {
-        data: {}
+        data: {},
+        relatedPost: []
       }
     }
   }

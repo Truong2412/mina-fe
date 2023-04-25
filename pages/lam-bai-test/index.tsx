@@ -19,7 +19,6 @@ export default function TakeTheTest() {
     []
   )
   const [mode, setMode] = useState<'test' | 'review'>('test')
-  const [openModal, setOpenModal] = useState(false)
   const [result, setResult] = useState('')
 
   const [testOptions, setTestOptions] = useState<getQuestionParamsProps>({
@@ -105,7 +104,6 @@ export default function TakeTheTest() {
       }
     })
     setResult(`Số câu đúng: ${correct}/ ${shuffleQuestion.length}`)
-    setOpenModal(true)
     setMode('review')
     console.log(shuffleQuestion)
   }

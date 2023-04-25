@@ -7,6 +7,7 @@ import queryString from 'query-string'
 import { useEffect, useState } from 'react'
 import { ClassInfo } from './ClassList-ClassInfo'
 import { SearchClassApi } from '@/pages/api/class.api'
+import { useQuery } from 'react-query'
 
 interface FilterProps {
   status?: CLASS_STATUS
@@ -19,43 +20,24 @@ export function ClassList() {
   const [filter, setFilter] = useState<FilterProps>({
     status: CLASS_STATUS.OPEN,
     page: 1,
-    pageSize: 9
+    pageSize: 6
   })
-  const [params, setParams] = useState<string>('page=1&pageSize=9')
-
-  const [loading, setLoading] = useState(false)
-
-  const [classList, setClassList] = useState<ClassProps[]>([])
-  const [total, setTotal] = useState(0)
+  const [params, setParams] = useState<string>('page=1&pageSize=6')
 
   const [detail, setDetail] = useState<ClassProps>({} as ClassProps)
-  async function searchClass(searchParams: string) {
-    setLoading(true)
-    const result = await SearchClassApi(searchParams)
-    checkRes(
-      result,
-      () => {
-        if (result.data !== null) {
-          setClassList(result.data.dataTable)
-          setTotal(result.data.totalCount)
-        }
-      },
-      () => {
-        message.error('Lấy danh sách lớp không thành công!')
-      },
-      () => setLoading(false)
-    )
-  }
 
-  useEffect(() => {
-    searchClass(params)
-  }, [params])
+  const searchClass = useQuery(['searchClass', params], () =>
+    SearchClassApi(params)
+  )
 
   //handle filter change
   function handleFilterChange(
     name: keyof FilterProps,
     value: CLASS_STATUS | Boolean | undefined
   ) {
+    if (name !== 'page') {
+      setFilter((prev) => ({ ...prev, page: 1 }))
+    }
     if (value === undefined) {
       let cloneFilter = { ...filter }
       delete cloneFilter[name]
@@ -65,13 +47,15 @@ export function ClassList() {
     }
   }
 
-  function handleSearch() {
+  useEffect(() => {
     const searchParamsString = queryString.stringify(filter)
-    setParams(searchParamsString)
-  }
+    return setParams(searchParamsString)
+  }, [filter])
 
   function handleViewDetail(i: number) {
-    setDetail(classList[i])
+    if (searchClass.data?.data?.dataTable[i]) {
+      setDetail(searchClass.data?.data?.dataTable[i])
+    }
   }
 
   return (
@@ -116,20 +100,15 @@ export function ClassList() {
               options={classLevelOption}
             />
           </Col>
-          <Col>
-            <Button onClick={handleSearch} type="primary">
-              Tìm kiếm
-            </Button>
-          </Col>
         </Row>
       </Col>
 
       <Col xxl={16}>
-        {loading ? (
+        {searchClass.isLoading ? (
           <ContentLoading />
         ) : (
           <Row gutter={[16, 16]}>
-            {classList.map((item, i) => (
+            {searchClass.data?.data?.dataTable.map((item, i) => (
               <Col
                 onClick={() => handleViewDetail(i)}
                 className="cardBox"
@@ -154,12 +133,14 @@ export function ClassList() {
               <Row justify="center">
                 <Pagination
                   className="roundedBox"
-                  pageSize={6}
-                  showQuickJumper={total > 100}
+                  pageSize={filter.pageSize}
+                  showQuickJumper={
+                    searchClass.data?.data?.totalCount !== undefined &&
+                    searchClass.data?.data?.totalCount > 100
+                  }
                   defaultCurrent={1}
-                  total={total}
+                  total={searchClass.data?.data?.totalCount}
                   onChange={(page) => handleFilterChange('page', page)}
-                  defaultPageSize={6}
                 />
               </Row>
             </Col>

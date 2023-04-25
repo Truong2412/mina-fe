@@ -64,9 +64,13 @@ export function NewClass() {
           //  onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          {/* <Form.Item
+          <Form.Item
             name="cardImg"
-            label="Ảnh đại diện cho lớp tuyển sinh"
+            label={
+              <label className="textTheme">
+                Ảnh đại diện cho lớp tuyển sinh
+              </label>
+            }
             rules={[
               {
                 required: true,
@@ -80,7 +84,7 @@ export function NewClass() {
                 form.setFieldValue('cardImg', value[0])
               }
             />
-          </Form.Item> */}
+          </Form.Item>
 
           <Form.Item
             name="classLevel"

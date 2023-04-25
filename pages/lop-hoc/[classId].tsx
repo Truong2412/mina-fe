@@ -23,6 +23,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { CreateRegisClassApi } from '../api/regis-clas.api'
+import { GetClassByIdApi } from '../api/class.api'
 
 interface ClassDetailProps {
   classData: ClassProps
@@ -30,7 +31,7 @@ interface ClassDetailProps {
 const learnToOption = [
   {
     label: 'Nâng cao kiến thức',
-    value:'Nâng cao kiến thức'
+    value: 'Nâng cao kiến thức'
   },
   {
     label: 'Phục vụ công việc',
@@ -38,32 +39,42 @@ const learnToOption = [
   },
   {
     label: 'Khác',
-    value:'Khác'
-  },
+    value: 'Khác'
+  }
 ]
 export default function ClassDetail({ classData }: ClassDetailProps) {
   const [openModal, setOpenModal] = useState(false)
-  const {setIsLoading} = useLoading()
-  const {user} = useUser()
+  const { setIsLoading } = useLoading()
+  const { user } = useUser()
   const initValues = {
     email: user.email ?? undefined,
-    everStudied: false,
+    everStudied: false
   }
+
+  console.log(classData)
 
   async function RegisCLass(values: any) {
     setIsLoading(true)
-    const  result = await CreateRegisClassApi({...values, userId: user._id ?? '', classId: classData._id})
-    checkRes(result,
-      ()=>{
-        if(result.data !== null){
+    const result = await CreateRegisClassApi({
+      ...values,
+      userId: user._id ?? '',
+      classId: classData._id
+    })
+    checkRes(
+      result,
+      () => {
+        if (result.data !== null) {
           message.success('Đã tạo đơn đăng ký thành công!')
           setOpenModal(false)
-        }else{
+        } else {
           message.error('Đã có lỗi xảy ra!')
         }
       },
-      ()=>{ message.error('Đã có lỗi xảy ra!')},
-      ()=> setIsLoading(false))
+      () => {
+        message.error('Đã có lỗi xảy ra!')
+      },
+      () => setIsLoading(false)
+    )
   }
 
   return (
@@ -187,7 +198,7 @@ export default function ClassDetail({ classData }: ClassDetailProps) {
               { required: true, message: 'Vui lòng điền đầy đủ thông tin!' }
             ]}
           >
-            <Input placeholder='Họ & tên' />
+            <Input placeholder="Họ & tên" />
           </Form.Item>
 
           <Form.Item
@@ -196,37 +207,37 @@ export default function ClassDetail({ classData }: ClassDetailProps) {
             rules={[
               { required: true, message: 'Vui lòng điền đầy đủ thông tin!' },
               {
-                validator: ((rule,value)=>{
-                  if(REGEX.PHONE.test(value)){
+                validator: (rule, value) => {
+                  if (REGEX.PHONE.test(value)) {
                     return Promise.resolve()
-                  }else{
+                  } else {
                     return Promise.reject('Số điện thoại không hợp lệ!')
                   }
-                })
+                }
               }
             ]}
           >
-            <Input placeholder='Số điện thoại' />
+            <Input placeholder="Số điện thoại" />
           </Form.Item>
 
           <Form.Item
             label="Địa chỉ"
             name="address"
             rules={[
-              { required: true, message: 'Vui lòng điền đầy đủ thông tin!' },
+              { required: true, message: 'Vui lòng điền đầy đủ thông tin!' }
             ]}
           >
-            <Input placeholder='Địa chỉ' />
+            <Input placeholder="Địa chỉ" />
           </Form.Item>
 
           <Form.Item
             label="Facebook link"
             name="facebookLink"
             rules={[
-              { required: true, message: 'Vui lòng điền đầy đủ thông tin!' },
+              { required: true, message: 'Vui lòng điền đầy đủ thông tin!' }
             ]}
           >
-            <Input placeholder='Facebook link' />
+            <Input placeholder="Facebook link" />
           </Form.Item>
 
           <Form.Item
@@ -235,11 +246,12 @@ export default function ClassDetail({ classData }: ClassDetailProps) {
             rules={[
               { required: true, message: 'Vui lòng điền đầy đủ thông tin!' },
               {
-                type: 'email', message: 'Email không hợp lệ!'
+                type: 'email',
+                message: 'Email không hợp lệ!'
               }
             ]}
           >
-            <Input placeholder='Số điện thoại' />
+            <Input placeholder="Số điện thoại" />
           </Form.Item>
 
           <Form.Item
@@ -249,7 +261,7 @@ export default function ClassDetail({ classData }: ClassDetailProps) {
               { required: true, message: 'Vui lòng điền đầy đủ thông tin!' }
             ]}
           >
-            <Input placeholder='Bạn biết đến Mina từ đâu' />
+            <Input placeholder="Bạn biết đến Mina từ đâu" />
           </Form.Item>
 
           <Form.Item
@@ -257,9 +269,9 @@ export default function ClassDetail({ classData }: ClassDetailProps) {
             name="everStudied"
           >
             <Radio.Group>
-            <Radio value={true}>Đã từng học </Radio>
-            <Radio value={false}>Chưa</Radio>
-          </Radio.Group>
+              <Radio value={true}>Đã từng học </Radio>
+              <Radio value={false}>Chưa</Radio>
+            </Radio.Group>
           </Form.Item>
 
           <Form.Item
@@ -270,18 +282,10 @@ export default function ClassDetail({ classData }: ClassDetailProps) {
             ]}
           >
             <Select placeholder="Mục đích học tập" options={learnToOption} />
-        
           </Form.Item>
 
-          <Form.Item
-            label="Ghi chú"
-            name="note"
-            rules={[
-              { required: false }
-            ]}
-          >
-            <Input.TextArea placeholder='Ghi chú' />
-        
+          <Form.Item label="Ghi chú" name="note" rules={[{ required: false }]}>
+            <Input.TextArea placeholder="Ghi chú" />
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 0, span: 24 }}>
@@ -298,12 +302,11 @@ export default function ClassDetail({ classData }: ClassDetailProps) {
 export async function getServerSideProps(context: any) {
   try {
     const { classId } = context.params
-    const result = await fetch(`${API}/class/${classId}`)
-    const resultData: ResponseProps<ClassProps> = await result.json()
-    const classData = resultData.data ?? ({} as ClassProps)
+    const result = await GetClassByIdApi(classId as string)
+
     return {
       props: {
-        classData
+        classData: result.data ?? {}
       }
     }
   } catch (error) {

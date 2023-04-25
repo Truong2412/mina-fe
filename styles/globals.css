@@ -212,12 +212,14 @@
   color: #000;
 }
 
+
 /* hộp ở lớp học - thông tin lớp */
 .roundedBox {
   border-radius: 0.5rem;
   background: transparent;
   padding: 0.5rem;
 }
+
 .boxclass {
   border: 1px solid #d9d9d9;
 }
@@ -242,14 +244,17 @@
   max-height: 400px;
 }
 
-
+.boxShadow {
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);
+}
+.deepBoxShadow {
+box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
 /* khong biet o dau */
 /* .cardImgBox {
   max-height: 200px;
 }
-.boxShadow {
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);
-}
+
 .loadingBox {
   border-radius: 0.5rem;
   background: #fff;

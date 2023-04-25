@@ -13,6 +13,7 @@ export interface ClassProps {
   numberOfLessons: number
   startDate: string
   time: any
+  cardImg: string
   daysOfWeek: string[]
   description: string
   creatorId: string

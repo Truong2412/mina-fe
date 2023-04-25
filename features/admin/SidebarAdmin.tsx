@@ -11,6 +11,7 @@ import { Posted } from './post/Posted'
 import { NewPost } from './post/NewPost'
 import { RegisClassManager } from './regisClass/RegisClassManager'
 import { QuestionManager } from './question/QuestionManager'
+import { PostManager } from './post/PostManager'
 
 // import { useNavigate } from 'react-router'
 type MenuItem = Required<MenuProps>['items'][number]
@@ -42,17 +43,7 @@ export const adminNavOption = [
   },
   {
     key: 'post',
-    component: null,
-    child: [
-      {
-        key: 'post-posted',
-        component: <Posted />
-      },
-      {
-        key: 'post-new',
-        component: <NewPost />
-      }
-    ]
+    component: <PostManager />
   },
   {
     key: 'question',
@@ -80,12 +71,7 @@ export const adminNav: MenuItem[] = [
       <ContainerOutlined style={{ fontSize: '1.5rem' }} />
       &nbsp;&nbsp;Bài viết
     </div>,
-    `post`,
-    null,
-    [
-      getItem(<div className="menuItem">Đã đăng</div>, `post-posted`),
-      getItem(<div className="menuItem">Đăng bài mới</div>, `post-new`)
-    ]
+    `post`
   ),
   getItem(
     <div className="menuItem">
@@ -109,14 +95,8 @@ export function SidebarAdmin({
     setCurrent(e.key)
     console.log(e.keyPath)
     let component: ReactElement | null
-    if (e.keyPath.length === 2) {
-      console.log(e.keyPath)
-      const parent = adminNavOption.find((item) => item.key === e.keyPath[1])
-      console.log(parent)
-      component =
-        parent?.child?.find((item) => item.key === e.keyPath[0])?.component ??
-        null
-    } else if (e.keyPath.length === 1) {
+
+    if (e.keyPath.length === 1) {
       component =
         adminNavOption.find((item) => item.key === e.keyPath[0])?.component ??
         null

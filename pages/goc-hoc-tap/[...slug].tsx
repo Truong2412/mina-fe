@@ -66,10 +66,6 @@ export async function getServerSideProps(context: any) {
         }
       }
     }
-    // const { classId } = context.params
-    // const result = await fetch(`${API}/class/${classId}`)
-    // const resultData: ResponseProps<ClassProps> = await result.json()
-    // const classData = resultData.data ?? ({} as ClassProps)
   } catch (error) {
     return {
       props: {

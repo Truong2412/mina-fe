@@ -79,7 +79,7 @@ export const CropImageUploader: React.FC<Props> = ({ maxLength, setValue }) => {
         onChange={onChange}
         onPreview={onPreview}
       >
-        {fileList.length < maxLength && '+ Tải lên'}
+        {fileList.length < maxLength && <p className="textTheme"> +Tải lên</p>}
       </Upload>
     </ImgCrop>
   )

@@ -5,6 +5,8 @@ import { ClassCard } from './card/ClassCard'
 import { RichTextEditor } from './richTexteditor/RichTextEditor'
 import { CardLoading } from './loading/CardLoading'
 import { QuestionTest } from './test/QuestionTest'
+import { RelatedPostCard } from './card/RelatedPostCard'
+import { BreadCrumb } from './breadCrumb/BreadCrumb'
 export {
   FullPageLoading,
   ClassCard,
@@ -12,5 +14,7 @@ export {
   ContentLoading,
   RichTextEditor,
   CardLoading,
-  QuestionTest
+  QuestionTest,
+  RelatedPostCard,
+  BreadCrumb
 }
