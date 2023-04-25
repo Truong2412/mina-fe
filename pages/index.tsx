@@ -80,7 +80,7 @@ function Home({ classes, news, study }: HomeProps) {
             <Row gutter={[16, 16]} justify="center">
               {classes &&
                 classes.map((item, i) => (
-                  <Col xxl={5} key={`class mina ${i}`}>
+                  <Col xxl={5} xs={21} key={`class mina ${i}`}>
                     <Link href={`/${PATH.CLASS}/${item._id}`}>
                       <ClassCard
                         type="student"
@@ -114,7 +114,7 @@ function Home({ classes, news, study }: HomeProps) {
           <Col span={24}>
             <Row gutter={[16, 16]} justify="center">
               {study.map((item, i) => (
-                <Col xxl={5} key={`card study ${i}`}>
+                <Col xxl={5} xs={22} key={`card study ${i}`}>
                   <Link
                     href={`/goc-hoc-tap/${removeMark(item.title)}&pid${
                       item._id

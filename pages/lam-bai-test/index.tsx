@@ -107,7 +107,6 @@ export default function TakeTheTest() {
     setMode('review')
     console.log(shuffleQuestion)
   }
-
   return (
     <ProtectPage role={ROLE.USER}>
       <Row
@@ -139,14 +138,20 @@ export default function TakeTheTest() {
       {shuffleQuestion.length > 0 && (
         <React.Fragment>
           <Row
-            className="roundedBox textTheme"
+            className="roundedBox"
             style={{
               position: 'fixed',
-              marginLeft: 6
+              marginLeft: 6,
+              right: 1,
+              color: 'white',
+              zIndex: 2,
+              opacity: 0.8,
+              background: 'red'
             }}
           >
-            Tiến độ : {`${answerd} / ${shuffleQuestion.length} Câu`}
+            Tiến độ : {`${answerd} / ${shuffleQuestion.length}`}
           </Row>
+
           <Row
             justify="center"
             gutter={[16, 0]}
@@ -163,16 +168,19 @@ export default function TakeTheTest() {
                   handleCheck={hanleCheckAnswer}
                 />
               ))}
-              <Row
-                style={{
-                  padding: 20,
-                  fontSize: '1.3rem',
-                  background: 'white',
-                  borderRadius: '0.5rem',
-                  marginTop: '1rem',
-                  color: 'black'
-                }}
-              >{`Kết Quả : ${result}`}</Row>
+
+              {mode === 'review' && (
+                <Row
+                  style={{
+                    padding: 20,
+                    fontSize: '1.3rem',
+                    background: 'white',
+                    borderRadius: '0.5rem',
+                    marginTop: '1rem',
+                    color: 'black'
+                  }}
+                >{`Kết Quả : ${result}`}</Row>
+              )}
 
               <Popconfirm
                 title="Bạn có chắc muốn kết thúc bài test"
