@@ -25,6 +25,7 @@ export function BreadCrumb({ list }: BreadCrumbProps) {
         if (i < list.length - 1) {
           return (
             <Link
+              key={`crumb ${i}`}
               href={item.link ?? '#'}
               style={{ fontWeight: 400, padding: '0 16 0 16' }}
             >
@@ -32,7 +33,7 @@ export function BreadCrumb({ list }: BreadCrumbProps) {
             </Link>
           )
         } else {
-          return <label>{item.label}</label>
+          return <label key={`crumb ${i}`}>{item.label}</label>
         }
       })}
     </Row>
