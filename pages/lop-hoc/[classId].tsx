@@ -53,7 +53,7 @@ export default function ClassDetail({ classData }: ClassDetailProps) {
     everStudied: false
   }
 
-  console.log(classData)
+  //console.log(classData)
 
   async function RegisCLass(values: any) {
     setIsLoading(true)

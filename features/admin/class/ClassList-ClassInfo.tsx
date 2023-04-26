@@ -84,7 +84,7 @@ function Students({ classId }: { classId: string | undefined }) {
     }
   })
   if (data) {
-    console.log(data.data?.dataTable)
+    //console.log(data.data?.dataTable)
   }
 
   return (

@@ -115,7 +115,7 @@ export function NewPost(): JSX.Element {
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
-              Submit
+              Đăng bài
             </Button>
           </Form.Item>
         </Form>

@@ -3,6 +3,7 @@ import { SettingOutlined, EditOutlined } from '@ant-design/icons'
 import { Badge, Card, Row } from 'antd'
 import Image from 'next/image'
 import { CLASS_STATUS } from '@/const/app-const'
+import { formatDate } from '@/ultis/dataConvert'
 const { Meta } = Card
 
 interface ClassCardProps {
@@ -34,7 +35,7 @@ export function ClassCard({
   createdAt
 }: ClassCardProps): JSX.Element {
   const imageUrl = cardImg ?? 'https://picsum.photos/200/300'
-  // console.log(imageUrl)
+  //console.log(imageUrl)
   let title: string = ''
   if (classLevel !== undefined) {
     title += `Cấp độ: ${classLevel}`
@@ -45,7 +46,7 @@ export function ClassCard({
 
   let scheduleText: string = ''
   if (time !== undefined) {
-    console.log(time)
+    //console.log(time)
     const startTime =
       new Date(time[0]).getHours().toString().padStart(2, '0') +
       ':' +
@@ -59,7 +60,7 @@ export function ClassCard({
 
   let days: string = ''
   if (daysOfWeek !== undefined) {
-    // console.log(schedule)
+    //console.log(schedule)
     // const startDate
   }
 
@@ -93,7 +94,10 @@ export function ClassCard({
           <div className="cardDescription">{daysOfWeek.toString()}</div>
         )}
         {numberOfLessons !== undefined && (
-          <div className="cardDescription">{`${numberOfLessons} buổi học`}</div>
+          <div className="cardDescription">
+            {`${numberOfLessons} buổi học`} - Khai giảng:{' '}
+            {formatDate(startDate ?? '')}
+          </div>
         )}
       </Card>
     </Badge.Ribbon>

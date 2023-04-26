@@ -25,7 +25,7 @@ interface HomeProps {
   study: PostProps[]
 }
 function Home({ classes, news, study }: HomeProps) {
-  console.log(classes)
+  //console.log(classes)
   return (
     <>
       <Head>
@@ -346,7 +346,7 @@ export async function getServerSideProps() {
       }
     }
   } catch (error) {
-    console.log(error)
+    //console.log(error)
     return {
       props: {
         classes: [],

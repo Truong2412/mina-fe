@@ -23,7 +23,8 @@ export const PATH = {
   STUDENT: 'hoc-vien',
   USER: 'user',
   ADMIN: 'admin',
-  NEWS_AND_EVENTS: 'tin-tuc-&-su-kien'
+  NEWS_AND_EVENTS: 'tin-tuc-&-su-kien',
+  STUDIES_SPACE: 'goc-hoc-tap'
 }
 
 export const STORAGE_KEY = {
@@ -64,10 +65,10 @@ export const menuitemsList = [
     path: PATH.ABOUT_US,
     label: 'Về mina'
   },
-  // {
-  //   path: PATH.CLASS_REGISTRATION,
-  //   label: 'Đăng ký học'
-  // },
+  {
+    path: PATH.STUDIES_SPACE,
+    label: 'Góc học tập'
+  },
   {
     path: PATH.COURSE,
     label: 'Khoá học'

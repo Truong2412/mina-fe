@@ -16,7 +16,7 @@ export const AppLayout: React.FC<Props> = ({ children }) => {
   const { isLoading } = useLoading()
   const { theme } = useTheme()
   const { user } = useUser()
-  console.log(user)
+  //console.log(user)
 
   useEffect(() => {
     const content = document.getElementById('content-mina')
@@ -48,9 +48,11 @@ export const AppLayout: React.FC<Props> = ({ children }) => {
   const [width, setWidth] = useState(0)
 
   useEffect(() => {
-    setWidth(window.innerWidth)
-  }, [])
+    const container = document.getElementById('__next')
 
+    setWidth(container?.offsetWidth ?? 1000)
+  }, [])
+  //console.log(width)
   return (
     <Row id="bg-mina" className="lightbg" justify="center">
       <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={20}>
@@ -66,7 +68,11 @@ export const AppLayout: React.FC<Props> = ({ children }) => {
           {contextHolder}
 
           <AppHeader />
-          <Content className="lightTheme" id="content-mina">
+          <Content
+            style={{ paddingBottom: '2rem' }}
+            className="lightTheme"
+            id="content-mina"
+          >
             {children}
           </Content>
 

@@ -71,7 +71,7 @@ export function RegisClassManager(): JSX.Element {
     setDetail({} as RegisClassProps)
   }, [data])
   return (
-    <Row gutter={[20, 20]}>
+    <Row gutter={[16, 16]}>
       <Col span={24}>
         <Row className="roundedBox" gutter={[16, 0]}>
           <Col>
@@ -125,8 +125,14 @@ export function RegisClassManager(): JSX.Element {
         {isLoading ? (
           <ContentLoading />
         ) : (
-          <Row gutter={[16, 16]}>
-            <Col span={24}>
+          <Row className="roundedBox textTheme boxShadow" gutter={[16, 16]}>
+            <Col
+              style={{
+                borderBottom: '1px solid #30fddd',
+                paddingBottom: '0.5rem'
+              }}
+              span={24}
+            >
               <Row className="textTheme">
                 <Col xxl={3}>Tạo lúc</Col>
                 <Col xxl={6}>Tên học viên</Col>
@@ -137,10 +143,10 @@ export function RegisClassManager(): JSX.Element {
                 </Col>
               </Row>
             </Col>
-            {data?.data?.dataTable.length === 0 && (
+            {data?.data?.dataTable?.length === 0 && (
               <p className="textTheme">Không còn đơn</p>
             )}
-            {data?.data?.dataTable.map((item, i) => (
+            {data?.data?.dataTable?.map((item, i) => (
               <Col
                 span={24}
                 onClick={() => handleViewDetail(i)}
@@ -154,7 +160,7 @@ export function RegisClassManager(): JSX.Element {
               <Row justify="center">
                 <Pagination
                   className="roundedBox"
-                  pageSize={data?.data?.paging.pageSize ?? 10}
+                  pageSize={data?.data?.paging?.pageSize ?? 10}
                   showQuickJumper={
                     data?.data?.totalCount !== undefined &&
                     data?.data?.totalCount > 100
@@ -168,12 +174,17 @@ export function RegisClassManager(): JSX.Element {
           </Row>
         )}
       </Col>
-      <Col className="roundedBox textTheme" xxl={8}>
-        {detail?._id == undefined ||
-          (!detail?._id && (
-            <p style={{ textAlign: 'center' }}>Click vào đơn để xem chi tiết</p>
-          ))}
-        <DetailRegistration {...detail} />
+      <Col xxl={8}>
+        <Row className="roundedBox textTheme boxShadow">
+          {detail?._id == undefined ||
+            (!detail?._id && (
+              <p style={{ textAlign: 'center' }}>
+                Click vào đơn để xem chi tiết
+              </p>
+            ))}
+
+          <DetailRegistration {...detail} />
+        </Row>
       </Col>
     </Row>
   )
@@ -253,7 +264,7 @@ export function DetailRegistration(detail: RegisClassProps) {
     changeStatus.mutate({ _id: data.regisId, status: REGIS_STATUS.CONFIRMED })
     createStudent.mutate(data)
   }
-  console.log(detail._id)
+  //console.log(detail._id)
   return (
     <React.Fragment>
       {!detail._id ? (
