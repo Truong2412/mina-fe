@@ -89,7 +89,7 @@ export default function TakeTheTest() {
     return setAnswered(total)
   }, [shuffleQuestion])
 
-  console.log(shuffleQuestion)
+  //console.log(shuffleQuestion)
 
   function handleAccept() {
     if (answerd < shuffleQuestion.length) {
@@ -105,7 +105,7 @@ export default function TakeTheTest() {
     })
     setResult(`Số câu đúng: ${correct}/ ${shuffleQuestion.length}`)
     setMode('review')
-    console.log(shuffleQuestion)
+    //console.log(shuffleQuestion)
   }
   return (
     <ProtectPage role={ROLE.USER}>

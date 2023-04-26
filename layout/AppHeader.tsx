@@ -124,7 +124,7 @@ export default function AppHeader(): JSX.Element {
 
           <Col xxl={6} xs={10}>
             <Row align="middle" gutter={[18, 0]} justify="end">
-              <Col xxl={{ push: 0, span: 7 }} xs={{ push: 14, span: 6 }}>
+              <Col xxl={{ push: 0, span: 16 }} xs={{ push: 14, span: 6 }}>
                 <Row gutter={[4, 0]} justify="end">
                   {user.token && user.token !== '' ? (
                     <React.Fragment>
@@ -146,7 +146,7 @@ export default function AppHeader(): JSX.Element {
                           />
                         </Badge>
                       </Col>
-                      <Col xs={0}>
+                      <Col xxl={14} xs={0}>
                         {user.role === ROLE.ADMIN ||
                         user.role === ROLE.STAFF ? (
                           <AdminMenu

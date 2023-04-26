@@ -29,7 +29,7 @@ export function MobileMenu() {
       <Button
         danger
         onClick={() => setOpen(true)}
-        style={{ position: 'fixed', zIndex: 4, top: '11%' }}
+        style={{ position: 'fixed', zIndex: 4, top: 70, left: 0 }}
       >
         <MenuUnfoldOutlined style={{ color: '#820014' }} />
       </Button>

@@ -1,15 +1,12 @@
-import { CLASS_LEVEL, classLevelOption } from '@/const/app-const'
+import { classLevelOption } from '@/const/app-const'
 import { QuestionProps } from '@/entities/question.entites'
-import { useLoading, useUser } from '@/hooks'
-import { checkRes } from '@/network/services/api-handler'
-import { CreateClassApi, CreateClassDto } from '@/pages/api/class.api'
+import { useLoading } from '@/hooks'
 import { CreateQuestionApi } from '@/pages/api/question.api'
 import { Button, Col, Form, Row, Select, message, Input } from 'antd'
 import React from 'react'
 import { useMutation } from 'react-query'
 
 export function NewQuestion() {
-  const { user } = useUser()
   const { setIsLoading } = useLoading()
   const [form] = Form.useForm()
 
@@ -20,9 +17,14 @@ export function NewQuestion() {
       onMutate: () => {
         setIsLoading(true)
       },
-      onSuccess: () => {
+      onSuccess: (data) => {
+        if (data.code < 202) {
+          message.success('Đã tạo')
+          form.resetFields()
+        } else {
+          message.error('Đã có lỗi xảy ra')
+        }
         setIsLoading(false)
-        message.success('Đã tạo')
       },
       onError: () => {
         setIsLoading(false)

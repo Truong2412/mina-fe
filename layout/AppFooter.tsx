@@ -90,10 +90,10 @@ export const AppFooter: React.FC = () => {
           ></Image>
         </Col>
         <Col>
-          <p>
+          {/* <p>
             Website được bảo vệ nội dung by Trương đẹp trai | Mọi hành vi sao
             chép nội dung có thể làm hại đến Website của bạn
-          </p>
+          </p> */}
           <p>&#169;&nbsp;Copyright by Mina Center - {thisYear}</p>
         </Col>
       </Row>

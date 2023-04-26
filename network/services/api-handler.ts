@@ -34,7 +34,7 @@ export async function apiHandler<T>({
     window.sessionStorage.getItem(STORAGE_KEY.LOCAL_USER) ?? ''
 
   try {
-    // console.log(headers)
+    //console.log(headers)
     const response: AxiosResponse = await axios({
       method: method,
       url: url,

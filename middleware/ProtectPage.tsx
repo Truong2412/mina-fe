@@ -12,7 +12,7 @@ export function ProtectPage({ role, children }: ProtectPageProps): JSX.Element {
   const { user } = useUser()
   useEffect(() => {
     if (user.role !== undefined && user.role <= role) {
-      console.log('page allowed')
+      //console.log('page allowed')
       return setAllow(true)
     } else {
       setAllow(false)

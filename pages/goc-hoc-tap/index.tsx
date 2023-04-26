@@ -1,7 +1,7 @@
 import { NewsAndEventCard } from '@/components/card/NewsAndEventCard'
 import React, { useEffect, useState } from 'react'
 import { HomeOutlined, SearchOutlined } from '@ant-design/icons'
-import { Breadcrumb, Col, Row, Input, Pagination } from 'antd'
+import { Col, Row, Input, Pagination } from 'antd'
 import { PostProps } from '@/entities/post.entities'
 import queryString from 'query-string'
 import { useQuery } from 'react-query'
@@ -10,6 +10,7 @@ import { ContentLoading } from '@/components'
 import Link from 'next/link'
 import { POST_STATUS, POST_TYPE } from '@/const/app-const'
 import { removeMark } from '@/ultis/dataConvert'
+import { BreadCrumb, CrumbProps } from '@/components/breadCrumb/BreadCrumb'
 
 export default function StudySpace() {
   const [filter, setFilter] = useState({
@@ -36,11 +37,17 @@ export default function StudySpace() {
     data !== undefined &&
     data.data?.dataTable !== undefined
   ) {
-    console.log('co ne')
+    //console.log('co ne')
   }
 
+  const breads: CrumbProps[] = [
+    {
+      label: 'Góc học tập'
+    }
+  ]
   return (
     <div style={{ margin: 0, padding: '10px 20px' }}>
+      <BreadCrumb list={breads} />
       {/* <Row justify="space-between">
         <Col>
           <Breadcrumb
@@ -81,7 +88,7 @@ export default function StudySpace() {
             data !== undefined &&
             data.data?.dataTable !== undefined &&
             data.data?.dataTable.map((item, i) => (
-              <Col key={`su kien mina ${i}`} xxl={5}>
+              <Col key={`su kien mina ${i}`} xxl={5} xs={22}>
                 <Link
                   href={`/goc-hoc-tap/${removeMark(item.title)}&pid${item._id}`}
                 >

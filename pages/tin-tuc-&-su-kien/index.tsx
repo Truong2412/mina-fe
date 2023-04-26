@@ -36,7 +36,7 @@ export default function ListNewsAndEvents() {
     data !== undefined &&
     data.data?.dataTable !== undefined
   ) {
-    console.log('co ne')
+    //console.log('co ne')
   }
 
   return (

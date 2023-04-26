@@ -29,7 +29,7 @@ module.exports = {
     disableStaticImages: true,
   },
   env: {
-    be_url: 'https://minamvp.click',
-    // be_url: 'http://localhost:8888',
+    // be_url: 'https://minamvp.click',
+    be_url: 'http://localhost:8888',
   },
 }

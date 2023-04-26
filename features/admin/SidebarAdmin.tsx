@@ -93,7 +93,7 @@ export function SidebarAdmin({
 
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key)
-    console.log(e.keyPath)
+    //console.log(e.keyPath)
     let component: ReactElement | null
 
     if (e.keyPath.length === 1) {

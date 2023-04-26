@@ -16,7 +16,7 @@ export function PostManager(): JSX.Element {
     }
   ]
   const onChange = (key: string) => {
-    console.log(key)
+    //console.log(key)
   }
 
   return <Tabs defaultActiveKey="1" items={items} onChange={onChange} />

@@ -1,49 +1,67 @@
-import { NotFoundPage } from '@/components/notFoundPage/NotFoundPage'
-import { API } from '@/const/app-const'
-import { REGEX } from '@/const/regexp'
-import { ClassProps } from '@/entities/class.entities'
-import { useLoading, useUser } from '@/hooks'
-import { ResponseProps, checkRes } from '@/network/services/api-handler'
-import { formatDate, formatTime } from '@/ultis/dataConvert'
-import {
-  Button,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Modal,
-  Radio,
-  Row,
-  Select,
-  Space,
-  message
-} from 'antd'
-import { GetServerSideProps } from 'next'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
-import { CreateRegisClassApi } from '../api/regis-clas.api'
-import { GetPostByIdApi } from '../api/post.api'
+import { PATH, POST_TYPE } from '@/const/app-const'
+import { Col, Divider, Row } from 'antd'
+
+import React from 'react'
+import { GetPostByIdApi, GetRelatedPostApi } from '../api/post.api'
 import { PostProps } from '@/entities/post.entities'
+import { BreadCrumb, RelatedPostCard } from '@/components'
+import { CrumbProps } from '@/components/breadCrumb/BreadCrumb'
+import Link from 'next/link'
 
 interface PostDetailProps {
   data: PostProps
+  relatedPost: PostProps[]
 }
 
-export default function StudyDetail({ data }: PostDetailProps) {
+export default function StudyDetail({ data, relatedPost }: PostDetailProps) {
+  const breads: CrumbProps[] = [
+    {
+      label: 'Tin tức & Sự kiện',
+      link: `/${PATH.STUDIES_SPACE}`
+    },
+    {
+      label: data.title
+    }
+  ]
   return (
-    <Row className="roundedBox textTheme">
+    <Row justify="center">
       <Col xxl={16}>
-        <Row>
-          <h3>{data.title}</h3>
-          <div
-            style={{ width: '100%' }}
-            className="roundedBox textTheme richTextBox"
-            dangerouslySetInnerHTML={{ __html: data.content }}
-          />
+        <BreadCrumb list={breads} />
+
+        <Row gutter={[16, 16]}>
+          <Col xxl={16}>
+            <Row
+              className="textTheme boxShadow roundedBox"
+              style={{ padding: '0.5rem' }}
+            >
+              <h3>{data.title}</h3>
+              <Col
+                span={24}
+                style={{ width: '100%', padding: '1.5rem' }}
+                className="roundedBox textTheme richTextBox"
+                dangerouslySetInnerHTML={{ __html: data.content }}
+              />
+            </Row>
+          </Col>
+          <Col xxl={8}>
+            <Row className="boxShadow roundedBox">
+              <Divider className="textTheme">Bài viết liên quan</Divider>
+              {relatedPost.map((item, i) => (
+                <Link
+                  key={`related post ${i}`}
+                  href={`tin-tuc-&-su-kien/${item.title}&pid${item._id}`}
+                >
+                  <RelatedPostCard
+                    author={item.author}
+                    title={item.title}
+                    createdAt={item.createdAt ?? ''}
+                  />
+                </Link>
+              ))}
+            </Row>
+          </Col>
         </Row>
       </Col>
-      <Col xxl={8}>Các bài liên quan</Col>
     </Row>
   )
 }
@@ -51,25 +69,19 @@ export default function StudyDetail({ data }: PostDetailProps) {
 export async function getServerSideProps(context: any) {
   try {
     const id = context.params.slug[0].split('&pid')[1] as string
-
+    const relatedPost = await GetRelatedPostApi(id, POST_TYPE.STUDY)
     const result = await GetPostByIdApi(id ?? '')
-    if (result.data !== null) {
-      return {
-        props: {
-          data: result.data
-        }
-      }
-    } else {
-      return {
-        props: {
-          data: {}
-        }
+    return {
+      props: {
+        data: result.data ?? {},
+        relatedPost: relatedPost.data ?? []
       }
     }
   } catch (error) {
     return {
       props: {
-        data: {}
+        data: {},
+        relatedPost: []
       }
     }
   }
